@@ -11,7 +11,7 @@ import { ClrIconModule } from '../../icon/icon.module';
 import { ClrCommonFormsModule } from '../common/common.module';
 
 import { NgControlService } from '../common/providers/ng-control.service';
-import { Layouts, LayoutService } from '../common/providers/layout.service';
+import { ClrFormLayout, LayoutService } from '../common/providers/layout.service';
 import { MarkControlService } from '../common/providers/mark-control.service';
 import { ControlIdService } from '../common/providers/control-id.service';
 import { DatalistIdService } from '../datalist/providers/datalist-id.service';
@@ -19,7 +19,7 @@ import { IfControlStateService, CONTROL_STATE } from '../common/if-control-state
 
 export function ContainerNoLabelSpec(testContainer, testControl, testComponent): void {
   describe('no label', () => {
-    let fixture, containerDE, containerEl, layoutService;
+    let fixture, containerDE, containerEl, layoutService, container;
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [ClrIconModule, ClrCommonFormsModule, FormsModule],
@@ -31,6 +31,7 @@ export function ContainerNoLabelSpec(testContainer, testControl, testComponent):
       containerDE = fixture.debugElement.query(By.directive(testContainer));
       containerEl = containerDE.nativeElement;
       layoutService = containerDE.injector.get(LayoutService);
+      container = containerDE.componentInstance;
     });
 
     it('adds an empty label when instantiated without vertical layout', () => {
@@ -40,10 +41,21 @@ export function ContainerNoLabelSpec(testContainer, testControl, testComponent):
     });
 
     it('does not add an empty label when instantiated with vertical layout', () => {
-      layoutService.layout = Layouts.VERTICAL;
+      layoutService.layout = ClrFormLayout.VERTICAL;
       fixture.detectChanges();
       const labels = containerEl.querySelectorAll('label');
       expect(Array.prototype.filter.call(labels, label => label.textContent === '').length).toBe(0);
+    });
+
+    it('should display helper text when no success-component is present', () => {
+      fixture.detectChanges();
+      expect(containerEl.querySelector('clr-control-helper')).toBeTruthy();
+      container.state = CONTROL_STATE.INVALID;
+      fixture.detectChanges();
+      expect(containerEl.querySelector('clr-control-helper')).toBeFalsy();
+      container.state = CONTROL_STATE.VALID;
+      fixture.detectChanges();
+      expect(containerEl.querySelector('clr-control-helper')).toBeTruthy();
     });
   });
 }
@@ -95,7 +107,7 @@ function fullSpec(description, testContainer, directives: any | any[], testCompo
 
     it('injects the layoutService', () => {
       expect(layoutService).toBeTruthy();
-      expect(layoutService.layout).toEqual(Layouts.HORIZONTAL);
+      expect(layoutService.layout).toEqual(ClrFormLayout.HORIZONTAL);
     });
 
     it('injects the IfControlStateService and subscribes', () => {
@@ -161,10 +173,10 @@ function fullSpec(description, testContainer, directives: any | any[], testCompo
 
     it('adds the .clr-row class to the host on non-vertical layouts', () => {
       expect(containerEl.classList).toContain('clr-row');
-      layoutService.layout = Layouts.VERTICAL;
+      layoutService.layout = ClrFormLayout.VERTICAL;
       fixture.detectChanges();
       expect(containerEl.classList).not.toContain('clr-row');
-      layoutService.layout = Layouts.COMPACT;
+      layoutService.layout = ClrFormLayout.COMPACT;
       fixture.detectChanges();
       expect(containerEl.classList).toContain('clr-row');
     });
@@ -177,7 +189,7 @@ function fullSpec(description, testContainer, directives: any | any[], testCompo
 
     it('adds the grid class for the control container when not vertical', () => {
       expect(container.controlClass()).toContain('clr-col-12');
-      layoutService.layout = Layouts.VERTICAL;
+      layoutService.layout = ClrFormLayout.VERTICAL;
       expect(container.controlClass()).not.toContain('clr-col-12');
     });
 

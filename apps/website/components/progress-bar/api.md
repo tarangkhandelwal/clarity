@@ -9,9 +9,13 @@ toc: true
 
 #### Selector & Basic Usage
 
+<doc-code>
+
 ```html
 <clr-progress-bar></clr-progress-bar>
 ```
+
+</doc-code>
 
 #### Bindings
 

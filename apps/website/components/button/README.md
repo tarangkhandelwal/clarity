@@ -156,36 +156,36 @@ Icon buttons are useful where interface space may be limited. If an icon represe
 
 We recommend you **choose an icon that best describes the action** that the user will be doing. Users may avoid unknown or abstract icon buttons.
 
-#### Types & Sizes
+### Types & Sizes
 
 <div class="clr-row">
 
 <div class="clr-col-sm-12 clr-col-lg-6 doc-do">
 <div class="doc-example">
-<cds-button size="icon" style="margin-right: 12px"><cds-icon shape="check"></cds-icon></cds-button>
-<cds-button size="icon" action="outline" style="margin-right: 12px"><cds-icon shape="folder"></cds-icon></cds-button>
-<cds-button size="icon" action="flat"><cds-icon shape="cog"></cds-icon></cds-button>
+<button class="btn btn-primary btn-icon" style="margin-right: 0.6rem"><clr-icon shape="check"></clr-icon></button>
+<button class="btn btn-icon" style="margin-right: 0.6rem"><clr-icon shape="folder"></clr-icon></button>
+<button class="btn btn-icon btn-link"><clr-icon shape="cog"></clr-icon></button>
 </div>
 Icon buttons are available in the solid, outline, and flat types. It’s also best to use the normal (36px) sized ones. This makes them easier to recognize and to click.
 </div>
 
 <div class="clr-col-sm-12 clr-col-lg-6 doc-dont">
 <div class="doc-example">
-<cds-button size="sm" style="margin-right: 12px"><cds-icon shape="check"></cds-icon></cds-button>
-<cds-button size="sm" action="outline" style="margin-right: 12px"><cds-icon shape="folder"></cds-icon></cds-button>
-<cds-button size="sm" action="flat"><cds-icon shape="cog"></cds-icon></cds-button>
+<button class="btn btn-sm btn-primary btn-icon" style="margin-right: 0.6rem"><clr-icon shape="check"></clr-icon></button>
+<button class="btn btn-sm btn-icon" style="margin-right: 0.6rem"><clr-icon shape="folder"></clr-icon></button>
+<button class="btn btn-icon btn-sm btn-link"><clr-icon shape="cog"></clr-icon></button>
 </div>
 Use small icon buttons in most cases. They are difficult to see and distinguish what the icon is or represents. They also create smaller click targets, making them harder to click.
 </div>
 
 </div>
 
-#### With Text
+### With Text
 
 <div class="clr-row">
 <div class="clr-col-sm-12 clr-col-lg-6 doc-do">
 <div class="doc-example">
-<cds-button size="icon" style="margin-right: 12px"><cds-icon shape="check"></cds-icon> Create</cds-button>
+<cds-button size="icon" style="margin-right: 0.6rem"><cds-icon shape="check"></cds-icon> Create</cds-button>
 <cds-button size="icon" status="danger"><cds-icon shape="times"></cds-icon> Delete</cds-button>
 </div>
 If you have the space, adding text helps users understand the action. Start icon buttons with icons and follow with text.
@@ -193,7 +193,7 @@ If you have the space, adding text helps users understand the action. Start icon
 
 <div class="clr-col-sm-12 clr-col-lg-6 doc-dont">
 <div class="doc-example">
-<cds-button size="icon" style="margin-right: 12px">Create <cds-icon shape="check"></cds-icon></cds-button>
+<cds-button size="icon" style="margin-right: 0.6rem">Create <cds-icon shape="check"></cds-icon></cds-button>
 <cds-button size="icon" status="danger">Delete <cds-icon shape="times"></cds-icon></cds-button>
 </div>
 Start icon buttons with text and follow with icon. This makes them more difficult to scan quickly.
@@ -203,7 +203,7 @@ Start icon buttons with text and follow with icon. This makes them more difficul
 <div class="clr-row" cds-layout="m-t:md">
 <div class="clr-col-sm-12 clr-col-lg-6">
 
-#### Title Attribute
+### Title Attribute
 
 If your icon button is has no text, we recommend adding the `title="` attribute to your icon buttons. This adds some additional context for users unfamiliar with what action your icon button might produce. Hovering over the icon button for a moment will show a tooltip that has the `title` text. The text should reflect the action being completed.
 
@@ -219,39 +219,93 @@ If your icon button is has no text, we recommend adding the `title="` attribute 
 
 ### Solid Buttons
 
-<doc-demo src="/demos/button/solid-css.html" demo="/demos/button/solid-css.html"></doc-demo>
+<doc-demo>
+!!!include(.vuepress/public/demos/button/solid-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/button/solid-css.html
+</doc-code>
 
 ### Outline
 
-<doc-demo src="/demos/button/outline-css.html" demo="/demos/button/outline-css.html"></doc-demo>
+<doc-demo>
+!!!include(.vuepress/public/demos/button/outline-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/button/outline-css.html
+</doc-code>
 
 ### Flat Buttons
 
-<doc-demo src="/demos/button/flat-css.html" demo="/demos/button/flat-css.html"></doc-demo>
+<doc-demo>
+!!!include(.vuepress/public/demos/button/flat-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/button/flat-css.html
+</doc-code>
 
 ### Types: Primary,Secondary and Tertiary
 
-<doc-demo src="/demos/button/types-css.html" demo="/demos/button/types-css.html"></doc-demo>
+<doc-demo>
+!!!include(.vuepress/public/demos/button/types-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/button/types-css.html
+</doc-code>
 
 ### States: Info, Success and Danger Outline Buttons
 
-<doc-demo src="/demos/button/states-css.html" demo="/demos/button/states-css.html"></doc-demo>
+<doc-demo>
+!!!include(.vuepress/public/demos/button/states-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/button/states-css.html
+</doc-code>
 
 ### Sizes: Normal, Small, Normal Flat, Small Flat
 
-<doc-demo src="/demos/button/sizes-css.html" demo="/demos/button/sizes-css.html"></doc-demo>
+<doc-demo>
+!!!include(.vuepress/public/demos/button/sizes-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/button/sizes-css.html
+</doc-code>
 
 ### Block
 
-<doc-demo src="/demos/button/block-css.html" demo="/demos/button/block-css.html"></doc-demo>
+<doc-demo>
+!!!include(.vuepress/public/demos/button/block-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/button/block-css.html
+</doc-code>
 
 ### Inverse
 
-<doc-demo src="/demos/button/inverse-css.html" demo="/demos/button/inverse-css.html"></doc-demo>
+<doc-demo>
+!!!include(.vuepress/public/demos/button/inverse-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/button/inverse-css.html
+</doc-code>
 
 ### Icon
 
-<doc-demo src="/demos/button/icon-css.html" demo="/demos/button/icon-css.html"></doc-demo>
+<doc-demo>
+!!!include(.vuepress/public/demos/button/icon-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/button/icon-css.html
+</doc-code>
 
 ### Loading
 
@@ -261,5 +315,10 @@ Use the `clrLoading` directive to change the state of the spinner button. The di
 - `ClrLoadingState.LOADING`: replaces the button text with a spinner.
 - `ClrLoadingState.SUCCESS`: briefly shows a check mark, and automatically transition back to the ClrLoadingState.DEFAULT state.
 
-<doc-demo src="/demos/button/loading-ng.html"></doc-demo>
-<doc-demo src="/demos/button/loading.ts"></doc-demo>
+<doc-code>
+<<< .vuepress/public/demos/button/loading-ng.html
+</doc-code>
+
+<doc-code>
+<<< .vuepress/public/demos/button/loading.ts
+</doc-code>

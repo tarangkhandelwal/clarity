@@ -6,6 +6,8 @@
 import includes from 'ramda/es/includes';
 import without from 'ramda/es/without';
 
+import { isStringAndNotNilOrEmpty } from './identity.js';
+
 export function getElementWidth(element: HTMLElement, unit = 'px') {
   if (element) {
     return element.getBoundingClientRect ? element.getBoundingClientRect().width + unit : '';
@@ -25,6 +27,10 @@ export function isHTMLElement(el: any) {
 }
 
 export type HTMLAttributeTuple = [string, string | boolean];
+
+export function hasAttributeAndIsNotEmpty(element: HTMLElement | null, attribute: string) {
+  return !!element && element.hasAttribute(attribute) && isStringAndNotNilOrEmpty(element.getAttribute(attribute));
+}
 
 export function setAttributes(element: HTMLElement, ...attributeTuples: HTMLAttributeTuple[]) {
   if (element) {
@@ -101,4 +107,16 @@ export function listenForAttributeChange(
 
 export function isVisible(element: HTMLElement) {
   return element?.offsetHeight > 0 && element?.hasAttribute('hidden') === false;
+}
+
+export function spanWrapper(nodeList: NodeListOf<ChildNode>): void {
+  Array.from(nodeList)
+    .filter(node => node.textContent!.trim().length > 0)
+    .forEach(node => {
+      if (node.parentElement && node.textContent !== null && node.nodeType === 3) {
+        const spanWrapper = document.createElement('span');
+        node.after(spanWrapper);
+        spanWrapper.appendChild(node);
+      }
+    });
 }

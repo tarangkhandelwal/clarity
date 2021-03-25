@@ -3,16 +3,12 @@
  * This software is released under MIT license.
  * The full license information can be found in LICENSE in the root directory of this project.
  */
+
+import { html } from 'lit-html';
 import { CdsButton, ClrLoadingState } from '@clr/core/button';
 import '@clr/core/badge/register.js';
 import '@clr/core/button/register.js';
-import {
-  componentIsStable,
-  createTestElement,
-  getComponentSlotContent,
-  removeTestElement,
-  waitForComponent,
-} from '@clr/core/test/utils';
+import { componentIsStable, createTestElement, getComponentSlotContent, removeTestElement } from '@clr/core/test/utils';
 
 describe('button element', () => {
   let testElement: HTMLElement;
@@ -20,16 +16,14 @@ describe('button element', () => {
   const placeholderText = 'Button Placeholder';
 
   beforeEach(async () => {
-    testElement = createTestElement();
-    testElement.innerHTML = `
+    testElement = await createTestElement(html`
       <form>
         <cds-button>
           <span>${placeholderText}</span>
         </cds-button>
       </form>
-    `;
+    `);
 
-    await waitForComponent('cds-button');
     component = testElement.querySelector<CdsButton>('cds-button');
   });
 
@@ -202,17 +196,20 @@ describe('button element', () => {
     let componentLink: CdsButton;
     let componentButton: CdsButton;
     let anchor: HTMLAnchorElement;
+    let anchorButton: HTMLAnchorElement;
 
     beforeEach(async () => {
-      testLinkElement = createTestElement();
-      testLinkElement.innerHTML = `
+      testLinkElement = await createTestElement(html`
         <cds-button><a href="about">About</a></cds-button>
+        <!-- deprecated 4.0 in favor of wrapping -->
         <cds-button>About</cds-button>
-      `;
-      await waitForComponent('cds-button');
+        <a href="about"><cds-button>About</cds-button></a>
+      `);
+
       componentLink = testLinkElement.querySelectorAll<CdsButton>('cds-button')[0];
       componentButton = testLinkElement.querySelectorAll<CdsButton>('cds-button')[1];
       anchor = componentLink.querySelector<HTMLAnchorElement>('a');
+      anchorButton = testLinkElement.querySelectorAll<HTMLAnchorElement>('a')[1];
     });
 
     afterEach(() => {
@@ -223,20 +220,24 @@ describe('button element', () => {
       await componentIsStable(componentLink);
       expect(componentLink).toBeTruthy();
       expect(componentLink.innerText).toBe('ABOUT');
+
+      expect(anchorButton.style.lineHeight).toBe('0');
+      expect(anchorButton.style.textDecoration).toBe('none');
     });
 
     it('should set button to be readonly', async () => {
       await componentIsStable(componentLink);
       expect(componentLink.readonly).toBe(true);
+      expect(anchorButton.querySelector('cds-button').readonly).toBe(true);
     });
 
     it('should apply host focus styles when link is in focus', async () => {
       anchor.dispatchEvent(new Event('focusin'));
-      await waitForComponent('cds-button');
+      await componentIsStable(componentLink);
       expect(componentLink.getAttribute('focused')).toBe('');
 
       anchor.dispatchEvent(new Event('focusout'));
-      await waitForComponent('cds-button');
+      await componentIsStable(componentLink);
       expect(componentLink.getAttribute('focused')).toBe(null);
     });
 
@@ -268,87 +269,19 @@ describe('button element', () => {
 });
 
 describe('buttonSlots: ', () => {
-  const iconSlotSelector = '.button-icon';
-  const badgeSlotSelector = '.button-badge';
   let elem: HTMLElement;
 
-  function getSlotName(classname: string) {
-    return classname.slice(1);
-  }
-
-  function getSlotNameSelector(selector: string) {
-    return 'slot[name="' + getSlotName(selector) + '"]';
-  }
-
-  beforeEach(() => {
-    elem = createTestElement();
+  beforeEach(async () => {
+    elem = await createTestElement(html`<cds-button>Text slot</cds-button>`);
   });
 
   afterEach(() => {
     removeTestElement(elem);
   });
 
-  it('should fallback to text slot', async () => {
-    elem.innerHTML = `<cds-button>Text slot</cds-button>`;
-    await waitForComponent('cds-button');
+  it('should project content into the slot', async () => {
     const component = elem.querySelector<CdsButton>('cds-button');
     const slots = getComponentSlotContent(component);
-
     expect(slots.default).toContain('Text slot');
-    expect(component.shadowRoot.querySelector(iconSlotSelector)).toBeNull();
-    expect(component.shadowRoot.querySelector(badgeSlotSelector)).toBeNull();
-  });
-
-  it('should include an icon slot if an icon is present', async () => {
-    elem.innerHTML = `<cds-button><cds-icon shape="ohai"></cds-icon>Text slot</cds-button>`;
-    await waitForComponent('cds-button');
-    const component = elem.querySelector<CdsButton>('cds-button');
-    const slots = getComponentSlotContent(component);
-    const iconSlotName = getSlotName(iconSlotSelector);
-
-    expect(slots.default).toContain('Text slot');
-
-    expect(component.shadowRoot.querySelector(iconSlotSelector)).not.toBeNull();
-    expect(component.shadowRoot.querySelector(getSlotNameSelector(iconSlotSelector))).not.toBeNull();
-    expect(slots[iconSlotName]).toContain('cds-icon');
-    expect(slots[iconSlotName]).toContain('shape="ohai"');
-
-    expect(component.shadowRoot.querySelector(badgeSlotSelector)).toBeNull();
-  });
-
-  it('should include a badge slot if a badge is present', async () => {
-    elem.innerHTML = `<cds-button><cds-badge>49</cds-badge>Text slot</cds-button>`;
-    await waitForComponent('cds-button');
-    const component = elem.querySelector<CdsButton>('cds-button');
-    const slots = getComponentSlotContent(component);
-    const badgeSlotName = getSlotName(badgeSlotSelector);
-
-    expect(slots.default).toContain('Text slot');
-
-    expect(component.shadowRoot.querySelector(badgeSlotSelector)).not.toBeNull();
-    expect(component.shadowRoot.querySelector(getSlotNameSelector(badgeSlotSelector))).not.toBeNull();
-    expect(slots[badgeSlotName]).toContain('<cds-badge slot="button-badge">49</cds-badge>');
-
-    expect(component.shadowRoot.querySelector(iconSlotSelector)).toBeNull();
-  });
-
-  it('should include both an icon and a badge slot if both are present', async () => {
-    elem.innerHTML = `<cds-button><cds-badge>49</cds-badge>Text slot<cds-icon shape="ohai"></cds-icon></cds-button>`;
-    await waitForComponent('cds-button');
-    const component = elem.querySelector<CdsButton>('cds-button');
-    const slots = getComponentSlotContent(component);
-    const badgeSlotName = getSlotName(badgeSlotSelector);
-    const iconSlotName = getSlotName(iconSlotSelector);
-
-    expect(slots.default).toContain('Text slot');
-
-    expect(component.shadowRoot.querySelector(iconSlotSelector)).not.toBeNull();
-    expect(component.shadowRoot.querySelector(getSlotNameSelector(iconSlotSelector))).not.toBeNull();
-    expect(slots[iconSlotName]).toContain('cds-icon');
-    expect(slots[iconSlotName]).toContain('shape="ohai"');
-
-    expect(component.shadowRoot.querySelector(badgeSlotSelector)).not.toBeNull();
-    expect(component.shadowRoot.querySelector(getSlotNameSelector(badgeSlotSelector))).not.toBeNull();
-    expect(slots[badgeSlotName]).toContain('<cds-badge slot="button-badge">49</cds-badge>');
   });
 });

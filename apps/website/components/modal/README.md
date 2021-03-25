@@ -33,37 +33,41 @@ Use a modal for self-contained processes with a clear start and end point. For t
 
 <DocModalWrapper></DocModalWrapper>
 
-#### Title
+### Title
 
 The title **summarizes the purpose** of the modal. In a confirmation modal, use a question in your title and make sure the action is clearly called out in the buttons.
 
-#### Content
+### Content
 
 The content may differ between different types of modals. **Be concise and provide a clear explanation** of the task or information a user should focus on.
 
-#### Buttons
+### Buttons
 
 Buttons should include clear and direct action for the user to take. Buttons are right-aligned based on the **Z&#160;Pattern**. Read more about it in Button Placement.
 
-#### Overlay backdrop
+### Overlay backdrop
 
 The background overlay is dark with opacity to provide the feeling of a third dimensional layer. This also eliminates distraction and helps the user focus on the modal content.
 
-<doc-demo demo="/demos/modal/modal-backdrop.html" class="has-padding"></doc-demo>
+<!-- <doc-demo>
+!!!include(.vuepress/public/demos/modal/modal-backdrop.html)!!!
+</doc-demo> -->
 
-<DocDemo toggle="false">
+<doc-code>
 
 ```html
 <div class="modal-backdrop" aria-hidden="true"></div>
 ```
 
-</DocDemo>
+</doc-code>
 
-#### Sizes
+### Sizes
 
 There are multiple sizes for modals. The Clarity modal defaults to medium but different sizes could be used based on the content and screen sizes you are planning to support. Always remember to test responsiveness as you design and use modals.
 
-<doc-demo demo="/demos/modal/modal-sizes.html"></doc-demo>
+<doc-demo>
+!!!include(.vuepress/public/demos/modal/modal-sizes.html)!!!
+</doc-demo>
 
 <div class="top-margin-wrapper">
   <cds-alert-group status="info">
@@ -75,7 +79,7 @@ In the following example, we are using a small size modal dialog.
 
 <DocModalWrapper size="sm"></DocModalWrapper>
 
-<DocDemo>
+<doc-code>
 
 ```html
 <div class="modal">
@@ -88,18 +92,19 @@ In the following example, we are using a small size modal dialog.
 <div class="modal-backdrop" aria-hidden="true"></div>
 ```
 
-</DocDemo>
+</doc-code>
 
 ## Behavior
 
 Modals are used in different scenarios. Most notably: alerting the user, confirmation dialogs, and task-oriented workflows.
 
-#### Animation
+### Animation
 
 The background overlay animates once a modal is launched to grab a user’s attention and retain their focus. Modals and backdrops support fading animations. Clarity recommends using `fadeDown` on the `modal-dialog` and `fade` on the `modal-backdrop`. These animations hide the modal and backdrop by default. Adding or removing the `in` class animates the modal or backdrop in or out, respectively.
 
 <div class="top-margin-wrapper">
-<DocDemo>
+
+<doc-code>
 
 ```html
 <div class="modal">
@@ -112,10 +117,11 @@ The background overlay animates once a modal is launched to grab a user’s atte
 <div class="modal-backdrop fade in" aria-hidden="true"></div>
 ```
 
-</DocDemo>
+</doc-code>
+
 </div>
 
-#### Dismissing modals
+### Dismissing modals
 
 A user needs to **actively** dismiss a modal. A modal should not disappear on its own. Taking any of the actions to either cancel or proceed should eventually dismiss the modal.
 
@@ -134,7 +140,7 @@ Clarity Modals are not dismissed when clicking on the background overlay. This p
 </div>
 </div>
 
-#### Stacking modals
+### Stacking modals
 
 Modals **should not** launch other modals. Stacking modals makes it hard to dismiss them and confuses the user on their levels of importance.
 
@@ -154,7 +160,7 @@ If you see a need to stack modals, you should:
 </div>
 </div>
 
-#### Scrolling
+### Scrolling
 
 Scrolling makes it hard for a user to go through the content of your modal or complete the task assigned. Use scrolling only when absolutely needed.
 
@@ -168,7 +174,8 @@ If your modals scroll, make sure:
 Besides a static HTML/CSS Modal component, we also offer a fully interactive Angular version of the component. So if you are using Angular, you can use the `ClrModal` component. By using `ClrModal`, you'll be able to leverage its interactive behavior and features out-of-the-box. If you would like to learn more about how to customize its default interactive behavior, please refer to [the API tab](./api.html).
 
 <div class="top-margin-wrapper">
-<DocDemo>
+
+<doc-code>
 
 ```html
 <clr-modal [(clrModalOpen)]="openModal">
@@ -183,5 +190,6 @@ Besides a static HTML/CSS Modal component, we also offer a fully interactive Ang
 </clr-modal>
 ```
 
-</DocDemo>
+</doc-code>
+
 </div>

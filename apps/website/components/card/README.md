@@ -39,9 +39,59 @@ Users might not scan to the bottom right of wide cards.
 
 </div>
 
+<div class="clr-row">
+
+<div class="clr-col-sm-12 clr-col-lg-6 doc-do">
+<ClrImage class="doc-example" title="Do align card actions to the left" src="/images/components/card/buttons_in_cards_2.png" align="center" />
+This card correctly aligns actions to the left.
+</div>
+
+<div class="clr-col-sm-12 clr-col-lg-6 doc-dont">
+<ClrImage class="doc-example" title="Don't align buttons to right" src="/images/components/card/buttons_in_cards_1.png" align="center" />
+Users might not scan to the bottom right of wide cards.
+</div>
+
+<div class="clr-col-sm-12 clr-col-lg-6">
+
 Progress bars belong at the card top or above the footer, closest to the triggering action. Be consistent with progress bar placement within a card group.
 
-<ClrImage title="Cards with Progress Bars" src="/images/components/card/card_progress.png" />
+</div>
+
+<div class="clr-col-sm-12 clr-col-lg-6">
+
+<div class="clr-row">
+    <div class="clr-col-6">
+        <div class="card">
+            <div class="card-block">
+                <div class="progress top">
+                    <progress value="30" max="100"></progress>
+                </div>
+                <h4 class="card-title">Card title</h4>
+                <p class="card-text">...</p>
+            </div>
+            <div class="card-footer">
+                <a href="javascript://" class="card-link">Click</a>
+            </div>
+        </div>
+    </div>
+    <div class="clr-col-6">
+        <div class="card">
+            <div class="card-block">
+                <h4 class="card-title">Card title</h4>
+                <p class="card-text">...</p>
+            </div>
+            <div class="card-footer">
+                <div class="progress">
+                    <progress value="50" max="100"></progress>
+                </div>
+                <a href="javascript://" class="card-link">Click</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
 
 ## Behavior
 
@@ -102,47 +152,114 @@ A card consists of a title 18 px Clarity City Light - content is Clarity City Re
 
 ### Basic card
 
-<doc-demo src="/demos/card/basic-css.html" demo="/demos/card/basic-css.html"></doc-demo>
+<doc-demo>
+!!!include(.vuepress/public/demos/card/basic-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/card/basic-css.html
+</doc-code>
 
 ### Clickable cards
 
-<doc-demo src="/demos/card/clickable-css.html" demo="/demos/card/clickable-css.html"></doc-demo>
+<doc-demo>
+!!!include(.vuepress/public/demos/card/clickable-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/card/clickable-css.html
+</doc-code>
 
 ### Image in cards
 
-<doc-demo src="/demos/card/images-css.html" demo="/demos/card/images-css.html"></doc-demo>
+<doc-demo>
+!!!include(.vuepress/public/demos/card/images-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/card/images-css.html
+</doc-code>
 
 ### Dropdown in card
 
 The footer can contain two actions. For more actions, use a [dropdown](/components/dropdown).
 
-<doc-demo src="/demos/card/dropdown-css.html" demo="/demos/card/dropdown-css.html"></doc-demo>
+<doc-demo>
+!!!include(.vuepress/public/demos/card/dropdown-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/card/dropdown-css.html
+</doc-code>
 
 ### Card media block
 
-<doc-demo src="/demos/card/media-block-css.html" demo="/demos/card/media-block-css.html"></doc-demo>
+<doc-demo>
+!!!include(.vuepress/public/demos/card/media-block-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/card/media-block-css.html
+</doc-code>
 
 ### Alert in card
 
 Cards can contain [alerts](/components/alert).
-<doc-demo src="/demos/card/alert-css.html" demo="/demos/card/alert-css.html"></doc-demo>
+
+<doc-demo>
+!!!include(.vuepress/public/demos/card/alert-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/card/alert-css.html
+</doc-code>
 
 ### Lists in cards
 
-<doc-demo src="/demos/card/lists-css.html" demo="/demos/card/lists-css.html"></doc-demo>
+<doc-demo>
+!!!include(.vuepress/public/demos/card/lists-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/card/lists-css.html
+</doc-code>
 
 ### List group in cards
 
-<doc-demo src="/demos/card/list-group-css.html" demo="/demos/card/list-group-css.html"></doc-demo>
+<doc-demo>
+!!!include(.vuepress/public/demos/card/list-group-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/card/list-group-css.html
+</doc-code>
 
 ### Progress bars in cards
 
-<doc-demo src="/demos/card/progress-bars-css.html" demo="/demos/card/progress-bars-css.html"></doc-demo>
+<doc-demo>
+!!!include(.vuepress/public/demos/card/progress-bars-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/card/progress-bars-css.html
+</doc-code>
 
 ### Cards in a grid
 
-<doc-demo src="/demos/card/grid-css.html" demo="/demos/card/grid-css.html"></doc-demo>
+<doc-demo>
+!!!include(.vuepress/public/demos/card/grid-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/card/grid-css.html
+</doc-code>
 
 ### Cards in css columns
 
-<doc-demo src="/demos/card/columns-css.html" demo="/demos/card/columns-css.html"></doc-demo>
+<doc-demo>
+!!!include(.vuepress/public/demos/card/columns-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/card/columns-css.html
+</doc-code>

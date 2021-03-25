@@ -24,14 +24,20 @@ import {
   ClarityIcons,
   linkIcon,
   fileIcon,
+  popOutIcon,
   downloadIcon,
   copyIcon,
   pencilIcon,
   folderOpenIcon,
+  bookmarkIcon,
   imageGalleryIcon,
   videoGalleryIcon,
   cloudIcon,
   loadCoreIconSet,
+  dotCircleIcon,
+  circleIcon,
+  successStandardIcon,
+  errorStandardIcon,
 } from '@clr/core/icon';
 
 ClarityIcons.addIcons(
@@ -40,10 +46,16 @@ ClarityIcons.addIcons(
   pencilIcon,
   folderOpenIcon,
   cloudIcon,
+  bookmarkIcon,
+  popOutIcon,
   imageGalleryIcon,
   videoGalleryIcon,
   downloadIcon,
-  copyIcon
+  copyIcon,
+  dotCircleIcon,
+  circleIcon,
+  successStandardIcon,
+  errorStandardIcon
 );
 loadCoreIconSet();
 

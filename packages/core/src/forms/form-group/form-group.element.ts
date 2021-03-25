@@ -46,7 +46,7 @@ import { styles } from './form-group.element.css.js';
  * </cds-form-group>
  * ```
  *
- * @element cds-form
+ * @element cds-form-group
  * @slot - For projecting input controls
  */
 export class CdsFormGroup extends LitElement {
@@ -89,8 +89,8 @@ export class CdsFormGroup extends LitElement {
 
   render() {
     return html`
-      <div class="private-host">
-        <slot cds-layout="vertical gap:${this.layout === 'compact' ? 'md' : 'lg'}"></slot>
+      <div class="private-host" cds-layout="vertical gap:${this.layout === 'compact' ? 'md' : 'lg'}">
+        <slot></slot>
       </div>
     `;
   }

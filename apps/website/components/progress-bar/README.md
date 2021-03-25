@@ -11,7 +11,11 @@ Use a progress bar to set expectation of the loading time. Users are more willin
 
 <div class="clr-row">
 <div class="clr-col-md-12 clr-col-lg-6">
-<div class="doc-height-100-container" cds-layout="p:xl"><doc-demo  demo="/demos/progress/labeled-css.html" toggle="false" /></div>
+<div class="doc-height-100-container" cds-layout="p:xl">
+<doc-demo>
+!!!include(.vuepress/public/demos/progress/labeled-css.html)!!!
+</doc-demo>
+</div>
 
 **Progress Bar Usage**
 
@@ -28,7 +32,11 @@ Use a progress bar to set expectation of the loading time. Users are more willin
 </div>
 <div class="clr-col-md-12 clr-col-lg-6">
 
-<div class="doc-height-100-container" cds-layout="p-t:md"><doc-demo demo="/demos/spinner/page-css.html" toggle="false" /></div>
+<div class="doc-height-100-container" cds-layout="p-t:md">
+<doc-demo>
+!!!include(.vuepress/public/demos/spinner/page-css.html)!!!
+</doc-demo>
+</div>
 
 **Spinner Usage**
 
@@ -50,31 +58,35 @@ Use a progress bar to set expectation of the loading time. Users are more willin
 
 When there is a specific goal duration use determinate progress to inform users about the process. Two examples are file upload/download, or a series of configuration steps that happen during an initialization process.
 
-[//] # (DEMOS x2 - processing / 3 of 4)
-
-#### Determinate Progress Bar
-
 - Show progress towards a specific maximum goal or known duration
 - Has an optional label that shows percentage completion
 - Keep messaging minimal
 - Use specific messaging: Process starting, Process finished, etc
 
-<doc-demo src="/demos/progress/determinate-ng.html" demo="/demos/progress/determinate-css.html" toggle="false" />
+<doc-demo>
+!!!include(.vuepress/public/demos/progress/determinate-css.html)!!!
+</doc-demo>
 
-[//] # (DEMOS x2 - processing / 3 of 4)
+<doc-code>
+<<< .vuepress/public/demos/progress/determinate-ng.html
+</doc-code>
 
 ### Indeterminate Progress
 
 When there is no estimate for the completion time or goal of a process, show indeterminate progress. This indicates that work is occurring but does not indicate a scope or imply an estimate for how long it will take to complete. One example is uploading a file of data that will be analyzed before a response.
-
-#### Indeterminate
 
 - Will animate continuously until complete
 - Uses specific messaging: E.g "Loading update 3 of 7"
 - Has no estimated end time
 - Indicates work is occurring
 
-<doc-demo src="/demos/progress/indeterminate-ng.html" demo="/demos/progress/indeterminate-css.html" toggle="false" />
+<doc-demo>
+!!!include(.vuepress/public/demos/progress/indeterminate-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/progress/indeterminate-ng.html
+</doc-code>
 
 ## Anatomy
 
@@ -82,4 +94,10 @@ When there is no estimate for the completion time or goal of a process, show ind
 
 Progress bars fill from left to right. Clarity places an optional label to the right of the progress bar.
 
-<doc-demo src="/demos/progress/labeled-ng.html" demo="/demos/progress/labeled-css.html" toggle="false" />
+<doc-demo>
+!!!include(.vuepress/public/demos/progress/labeled-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/progress/labeled-ng.html
+</doc-code>

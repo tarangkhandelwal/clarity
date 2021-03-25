@@ -11,9 +11,13 @@ toc: true
 
 #### Selector & Basic Usage
 
+<doc-code>
+
 ```html
 <clr-datagrid>...</clr-datagrid>
 ```
+
+</doc-code>
 
 #### Bindings
 
@@ -30,9 +34,13 @@ Bindings or methods for this class.
 
 #### Selector & Basic Usage
 
+<doc-code>
+
 ```html
 <clr-dg-action-bar><clr-dg-action-bar></clr-dg-action-bar></clr-dg-action-bar>
 ```
+
+</doc-code>
 
 ### ClrDatagridActionOverflow
 
@@ -40,6 +48,8 @@ Declare this component inside of the `clr-dg-row` element. It is used to project
 operate on a single row item.
 
 #### Selector & Basic Usage
+
+<doc-code>
 
 ```html
 <clr-datagrid>
@@ -56,6 +66,8 @@ operate on a single row item.
 </clr-datagrid>
 ```
 
+</doc-code>
+
 #### Bindings
 
 <DocComponentApi component="ClrDatagridActionOverflow" item="bindings" />
@@ -64,9 +76,13 @@ operate on a single row item.
 
 #### Selector & Basic Usage
 
+<doc-code>
+
 ```html
 <clr-dg-column></clr-dg-column>
 ```
+
+</doc-code>
 
 The ClrDgatagridColumn is used to project column header content, declare the property on the model that relates to a
 column and declare filters, sorting as well as if it can be hidden by the user.
@@ -80,11 +96,13 @@ column and declare filters, sorting as well as if it can be hidden by the user.
 Declares the filter component to be applied on the container (clr-dg-column) element. This is only needed when
 creating and applying custom filters to a column.
 
-TODO: Add in docs for clr-dg-string-filter and clr-dg-numeric-filter
+<!-- @TODO: Add in docs for clr-dg-string-filter and clr-dg-numeric-filter -->
 
 #### Selector & Basic Usage
 
 ##### Inline View
+
+<doc-code>
 
 ```html
 <-- In the columns declaration -->
@@ -95,6 +113,10 @@ TODO: Add in docs for clr-dg-string-filter and clr-dg-numeric-filter
   </clr-dg-filter>
 </clr-dg-column>
 ```
+
+</doc-code>
+
+<doc-code>
 
 ```javascript
 import { ClrDatagridFilterInterface } from '@clr/angular';
@@ -117,7 +139,11 @@ class MyComponent {
 }
 ```
 
+</doc-code>
+
 ##### Encapsulated View
+
+<doc-code>
 
 ```html
 <clr-dg-filter [clrDgFilter]="myFilter">
@@ -128,6 +154,10 @@ class MyComponent {
   <-- The HTML for custom view with myFilter -->
 </clr-dg-filter>
 ```
+
+</doc-code>
+
+<doc-code>
 
 ```javascript
 import { ClrDatagridFilterInterface, ClrDatagridFilter } from '@clr/angular';
@@ -149,6 +179,8 @@ class MyFilter implements ClrDatagridFilterInterface<User> {
 }
 ```
 
+</doc-code>
+
 #### Bindings
 
 <DocComponentApi component="ClrDatagridFilter" item="bindings" />
@@ -161,6 +193,8 @@ class MyFilter implements ClrDatagridFilterInterface<User> {
 
 #### Selector & Basic Usage
 
+<doc-code>
+
 ```html
 <clr-datagrid>
   <clr-dg-column>User ID</clr-dg-column>
@@ -169,6 +203,8 @@ class MyFilter implements ClrDatagridFilterInterface<User> {
   </clr-dg-row>
 </clr-datagrid>
 ```
+
+</doc-code>
 
 #### Bindings
 
@@ -180,6 +216,8 @@ This class is used to project cell content into. Content can be simple textual c
 
 #### Selector & Basic Usage
 
+<doc-code>
+
 ```html
 <clr-datagrid>
   <clr-dg-column>User ID</clr-dg-column>
@@ -189,6 +227,8 @@ This class is used to project cell content into. Content can be simple textual c
 </clr-datagrid>
 ```
 
+</doc-code>
+
 ### ClrDgFooter
 
 This class contains a layout for the following features: non-interactive icon that appears when rows are selected, a
@@ -196,6 +236,8 @@ toggle button for the hide/show control when one or more columns are hideable an
 component. Any other projected content will be displayed in the description slot.
 
 #### Selector & Basic Usage
+
+<doc-code>
 
 ```html
 <clr-datagrid>
@@ -209,9 +251,13 @@ component. Any other projected content will be displayed in the description slot
 </clr-datagrid>
 ```
 
+</doc-code>
+
 ### ClrDatagridPagination
 
 #### Selector & Basic Usage
+
+<doc-code>
 
 ```html
 <clr-datagrid>
@@ -227,6 +273,8 @@ component. Any other projected content will be displayed in the description slot
 </clr-datagrid>
 ```
 
+</doc-code>
+
 #### Bindings
 
 <DocComponentApi component="ClrDatagridPagination" item="bindings" />
@@ -236,6 +284,8 @@ component. Any other projected content will be displayed in the description slot
 Child component of pagination. Used to set the page size for pagination calculations.
 
 #### Selector & Basic Usage
+
+<doc-code>
 
 ```html
 <clr-datagrid>
@@ -252,6 +302,8 @@ Child component of pagination. Used to set the page size for pagination calculat
 </clr-datagrid>
 ```
 
+</doc-code>
+
 #### Bindings
 
 <DocComponentApi component="ClrDatagridPageSize" item="bindings" />
@@ -262,6 +314,8 @@ Content projected into this component appears only when the datagrid is empty.
 
 #### Selector & Basic Usage
 
+<doc-code>
+
 ```html
 <clr-datagrid>
   <!-- columns, rows, footer, etc declared -->
@@ -269,11 +323,15 @@ Content projected into this component appears only when the datagrid is empty.
 </clr-datagrid>
 ```
 
+</doc-code>
+
 ### ClrDatagridDetail
 
 Use this to project the details view when a row has master/detail enabled.
 
 #### Selector & Basic Usage
+
+<doc-code>
 
 ```html
 <clr-datagrid>
@@ -286,6 +344,8 @@ Use this to project the details view when a row has master/detail enabled.
   </clr-dg-detail>
 </clr-datagrid>
 ```
+
+</doc-code>
 
 ## Angular Directives
 
@@ -301,6 +361,8 @@ datagrid displays UI controls to hide and show the columns that have this direct
 
 Note, the object passed to the directive was a design decision to make it explicit what was being set. This separates the declaration of the feature from the (hidden) state of the feature.
 
+<doc-code>
+
 ```html
 <clr-datagrid>
   <clr-dg-column>
@@ -311,6 +373,8 @@ Note, the object passed to the directive was a design decision to make it explic
   <!-- placeholder, rows, footer, etc declared -->
 </clr-datagrid>
 ```
+
+</doc-code>
 
 #### Bindings
 
@@ -323,6 +387,8 @@ of the data processing needed for filters, sorting and pagination. The TrackByFu
 
 #### Selector & Basic Usage
 
+<doc-code>
+
 ```html
 <clr-datagrid>
     <clr-dg-row *clrDgItems="let user of users; trackBy: myTrackByFunction"">
@@ -331,6 +397,8 @@ of the data processing needed for filters, sorting and pagination. The TrackByFu
     <!-- placeholder, rows, footer, etc declared -->å
 </clr-datagrid>
 ```
+
+</doc-code>
 
 #### Bindings
 
@@ -343,6 +411,8 @@ Use it on the clr-dg-detail element and use the let keyword to declare a templat
 
 #### Selector & Basic Usage
 
+<doc-code>
+
 ```html
 <clr-datagrid>
   <!-- columns, rows, footer, etc declared -->
@@ -354,6 +424,8 @@ Use it on the clr-dg-detail element and use the let keyword to declare a templat
   </clr-dg-detail>
 </clr-datagrid>
 ```
+
+</doc-code>
 
 #### Bindings
 
@@ -371,6 +443,8 @@ the data gets sorted.
 
 #### Basic Usage
 
+<doc-code>
+
 ```javascript
 interface ClrDatagridStateInterface<T = any> {
   page?: {
@@ -386,6 +460,8 @@ interface ClrDatagridStateInterface<T = any> {
   filters?: any[];
 }
 ```
+
+</doc-code>
 
 #### Bindings
 

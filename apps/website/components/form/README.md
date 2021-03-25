@@ -19,19 +19,37 @@ Clarity offers three types of forms: horizontal (our recommended default), verti
 
 Default Horizontal formats are good for the quick scanning of labels, and can be used in cases of limited vertical space. The space between label and input however can slow users down.
 
-<doc-demo file="/demos/form/horizontal.html" />
+<doc-demo>
+!!!include(.vuepress/public/demos/form/horizontal.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/form/horizontal.html
+</doc-code>
 
 ### Vertical
 
 This option is better for scanning, mobile experiences, accessibility, and localization. While it offers better completion rates, it is less ideal for longer forms.
 
-<doc-demo file="/demos/form/vertical.html" />
+<doc-demo>
+!!!include(.vuepress/public/demos/form/vertical.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/form/vertical.html
+</doc-code>
 
 ### Compact
 
 For cases with highly limited space, we provide a compact form layout.
 
-<doc-demo file="/demos/form/compact.html" />
+<doc-demo>
+!!!include(.vuepress/public/demos/form/compact.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/form/compact.html
+</doc-code>
 
 ### Form Length
 
@@ -135,15 +153,15 @@ Without the `clr-CONTROL-container` parent the forms and form controls are not a
 
 Finally, for screen readers, if there are any controls with errors after the submit action an `aria-live` region will be updated with the associated labels for each control in the error state.
 
-Deprecation: Since v4, we will no longer handle setting `aria-live` and announcing the message for you by default. Based on the application use case, you can use the new `ClrAriaLiveService` to make announcements when they make sense for a user to hear about updates or loading status changes.
-
 ## Forms Using Angular
 
 Clarity has created a set of directives to help manage forms with minimal effort by developers. The structure is more condensed and easier to implement, so it is the recommended approach to use the following if you are using Angular. More form controls are being added regularly.
 
-#### Basic form
+### Basic form
 
 Then declare a form start by adding the `clrForm` directive to the form element. This will wire up some internals to manage the form itself.
+
+<doc-code>
 
 ```html
 <form clrForm>
@@ -151,9 +169,13 @@ Then declare a form start by adding the `clrForm` directive to the form element.
 </form>
 ```
 
-#### Layout options
+</doc-code>
+
+### Layout options
 
 If you wish to have a different layout, then you can use the `clrLayout` directive to set the desired layout. The appropriate grid classes will be applied to enable automatic layout switching for mobile viewports.
+
+<doc-code>
 
 ```html
 <form clrForm clrLayout="horizontal">
@@ -161,9 +183,13 @@ If you wish to have a different layout, then you can use the `clrLayout` directi
 </form>
 ```
 
-#### Basic structure
+</doc-code>
+
+### Basic structure
 
 When you start to fill in your form controls, each will should be wrapped in a container like you see here in this text input example.
+
+<doc-code>
 
 ```html
 <form clrForm>
@@ -178,9 +204,13 @@ When you start to fill in your form controls, each will should be wrapped in a c
 </form>
 ```
 
-#### Helper and validation messages
+</doc-code>
+
+### Helper and validation messages
 
 These Angular components also support built in helper text and validation with error messages.
+
+<doc-code>
 
 ```html
 <form clrForm>
@@ -193,11 +223,15 @@ These Angular components also support built in helper text and validation with e
 </form>
 ```
 
+</doc-code>
+
 All fields should be assumed to be required. Clarity does not support a required input treatment for labels (which often comes in the form of an \* by the label). The recommendation is to focus your forms to include only required fields, and if a field is optional then you can describe it as such in the label like (Optional).
 
 Info
 
 For screen reader accessibility, forms with validation messages should provide a descriptive message on how validation messages will be triggered. The `.clr-sr-only` class will hide content and only make it visible for screen readers.
+
+<doc-code>
 
 ```html
 <form clrForm>
@@ -219,15 +253,19 @@ For screen reader accessibility, forms with validation messages should provide a
 </form>
 ```
 
+</doc-code>
+
 This pattern is more accessible and clear by writing the word "error" explicitly for users (and screen readers) to read, with research to back this up compared with the use of a red required asterisk (\*). See [this article from fusionbox](https://www.fusionbox.com/blog/detail/rethinking-the-red-required-asterisk-for-better-form-ux/599/) provides some evidence for this rationale.
 
-#### Multiple error messages
+### Multiple error messages
 
 If you want to support multiple error messages, you can do this by defining an error message for each scenario using `clrIfError`. It is recommended that you create an error message for each validator you specify. Use the validator name provided in the binding for `*clrIfError="'errorName'"`, which might be your custom validator or a built in Angular one.
 
-#### Reset and force validation
+### Reset and force validation
 
 All Clarity form controls support resetting the validation state simply by calling the `reset()` method on the `FormControl` or `FormGroup`.
+
+<doc-code>
 
 ```javascript
 import { Component } from '@angular/core';
@@ -260,7 +298,11 @@ export class ReactiveFormsDemo {
 }
 ```
 
+</doc-code>
+
 Normally, validation errors only appear after the control has been focused on by the user. In cases where you want to force validation errors to show (such as when the user tried to submit a form), you simply need to mark every control as touched with Angular. You can use the form API to accomplish this, `ClrForm.markAsTouched()`, which will force all form controls inside of a form to be touched, which will display the validation errors.
+
+<doc-code>
 
 ```javascript
 import { ViewChild, Component } from '@angular/core';
@@ -294,9 +336,13 @@ export class ReactiveFormsDemo {
 }
 ```
 
-#### Layout with grid
+</doc-code>
+
+### Layout with grid
 
 You can use the `clrLabelSize` directive to configure the label width for an entire form. This is useful for `horizontal` and compact layouts, but doesn't apply when you are using `vertical` layout. It will accept a number between 1-12 to calculate the width according to our grid, and the controls will adopt the remaining size. For example if you pass `clrLabelSize="4"` it will size the controls to use 8 grid columns for a total of 12 columns.
+
+<doc-code>
 
 ```html
 <form clrForm clrLayout="horizontal" clrLabelSize="4">
@@ -308,9 +354,13 @@ You can use the `clrLabelSize` directive to configure the label width for an ent
 </form>
 ```
 
-#### Overriding column widths
+</doc-code>
+
+### Overriding column widths
 
 For horizontal layouts, you can override the default widths for labels (2 columns) and controls (10 columns). Even on horizontal layouts, the default behavior should still use a vertical layout for narrow mobile sizes. That means you should always include the class `clr-col-12` on both the input and label. Ensure your override columns add up to 12 to use the full space.
+
+<doc-code>
 
 ```html
 <form clrForm>
@@ -323,9 +373,13 @@ For horizontal layouts, you can override the default widths for labels (2 column
 </form>
 ```
 
-#### Reactive Forms
+</doc-code>
+
+### Reactive Forms
 
 Forms also work with reactive forms with the same support for validations.
+
+<doc-code>
 
 ```javascript
 import { Component } from '@angular/core';
@@ -341,6 +395,10 @@ export class ReactiveFormsDemo {
 }
 ```
 
+</doc-code>
+
+<doc-code>
+
 ```html
 <form clrForm [formGroup]="exampleForm">
   <clr-input-container>
@@ -352,13 +410,17 @@ export class ReactiveFormsDemo {
 </form>
 ```
 
-#### Custom and non-Clarity Controls
+</doc-code>
+
+### Custom and non-Clarity Controls
 
 Applications often have form controls that are not supported by Clarity directly. To make these controls work nicely with Clarity, you can wrap them in a generic control container. Regardless if you make your own form controls or import a third party control, the generic container should help make your controls more consistent. The only requirement is that the form control works with Angular forms (Reactive or Template-Driven).
 
 The basic process is to wrap the form control in the `clr-control-container` component, and then apply the `clrControl` directive to the form control itself.
 
 It is likely that you'll have to write some CSS rules to make the custom controls fit and look correct within the generic control container. Use specific selectors to avoid changing the default form control behaviors in other parts of the application!
+
+<doc-code>
 
 ```javascript
 import { Component } from '@angular/core';
@@ -390,6 +452,10 @@ export class FormsGenericContainerDemo {
   });
 }
 ```
+
+</doc-code>
+
+<doc-code>
 
 ```html
 <!-- Template Driven Example -->
@@ -456,3 +522,5 @@ export class FormsGenericContainerDemo {
   <button class="btn btn-primary" type="submit">Submit</button>
 </form>
 ```
+
+</doc-code>

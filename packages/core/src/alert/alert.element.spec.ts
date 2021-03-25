@@ -3,18 +3,14 @@
  * This software is released under MIT license.
  * The full license information can be found in LICENSE in the root directory of this project.
  */
+
+import { html } from 'lit-html';
 import '@clr/core/alert/register.js';
 import '@clr/core/icon/register.js';
 import { CdsAlert, getIconStatusTuple, iconShapeIsAlertStatusType, iconTitleIsAlertStatusLabel } from '@clr/core/alert';
 import { CdsIcon, infoStandardIcon } from '@clr/core/icon';
 import { CommonStringsService } from '@clr/core/internal';
-import {
-  componentIsStable,
-  createTestElement,
-  getComponentSlotContent,
-  removeTestElement,
-  waitForComponent,
-} from '@clr/core/test/utils';
+import { componentIsStable, createTestElement, getComponentSlotContent, removeTestElement } from '@clr/core/test/utils';
 import { CdsInternalCloseButton } from '@clr/core/internal-components/close-button';
 
 describe('Alert element – ', () => {
@@ -25,12 +21,7 @@ describe('Alert element – ', () => {
 
   describe('Lightweight alerts: ', () => {
     beforeEach(async () => {
-      testElement = createTestElement();
-      testElement.innerHTML = `
-        <cds-alert>${placeholderText}</cds-alert>
-      `;
-
-      await waitForComponent('cds-alert');
+      testElement = await createTestElement(html`<cds-alert>${placeholderText}</cds-alert>`);
       component = testElement.querySelector<CdsAlert>('cds-alert');
     });
 
@@ -62,13 +53,11 @@ describe('Alert element – ', () => {
     let customComponent: CdsAlert;
 
     beforeEach(async () => {
-      testElement = createTestElement();
-      testElement.innerHTML = `
+      testElement = await createTestElement(html`
         <cds-alert id="defaultAlert">${placeholderText}</cds-alert>
         <cds-alert id="customAlert"><cds-icon shape="ohai"></cds-icon>${placeholderText}</cds-alert>
-      `;
+      `);
 
-      await waitForComponent('cds-alert');
       component = testElement.querySelector<CdsAlert>('#defaultAlert');
       customComponent = testElement.querySelector<CdsAlert>('#customAlert');
     });
@@ -133,13 +122,10 @@ describe('Alert element – ', () => {
     let customComponent: CdsAlert;
 
     beforeEach(async () => {
-      testElement = createTestElement();
-      testElement.innerHTML = `
+      testElement = await createTestElement(html`
         <cds-alert id="defaultAlert">${placeholderText}</cds-alert>
         <cds-alert id="customAlert"><cds-icon shape="ohai"></cds-icon>${placeholderText}</cds-alert>
-      `;
-
-      await waitForComponent('cds-alert');
+      `);
       component = testElement.querySelector<CdsAlert>('#defaultAlert');
       customComponent = testElement.querySelector<CdsAlert>('#customAlert');
     });
@@ -189,7 +175,7 @@ describe('Alert element – ', () => {
       expect(customComponent.status).toBe('loading');
       expect(customComponent.shadowRoot.querySelector(alertStatusIconSelector)).toBeNull();
       expect(customComponent.shadowRoot.querySelector('cds-icon')).toBeNull();
-      expect(customComponent.shadowRoot.querySelector('.spinner')).not.toBeNull();
+      expect(customComponent.shadowRoot.querySelector('.alert-spinner')).not.toBeNull();
       const customAlertSlotContent = getComponentSlotContent(customComponent);
       expect(customAlertSlotContent['alert-icon']).toBeUndefined();
     });
@@ -202,15 +188,13 @@ describe('Alert element – ', () => {
     const placeholderActionsText = 'This is where action elements go.';
 
     beforeEach(async () => {
-      testElement = createTestElement();
-      testElement.innerHTML = `
+      testElement = await createTestElement(html`
         <cds-alert alert-group-type="default">
           ${placeholderText}
           <cds-alert-actions>${placeholderActionsText}</cds-alert-actions>
         </cds-alert>
-      `;
+      `);
 
-      await waitForComponent('cds-alert');
       component = testElement.querySelector<CdsAlert>('cds-alert');
     });
 
@@ -229,7 +213,7 @@ describe('Alert element – ', () => {
       await componentIsStable(component);
       const slots = getComponentSlotContent(component);
       expect(slots.actions.trim()).toBe(
-        `<cds-alert-actions slot="actions" type="default">${placeholderActionsText}</cds-alert-actions>`
+        `<cds-alert-actions slot="actions" type="default"><!---->${placeholderActionsText}<!----></cds-alert-actions>`
       );
     });
   });
@@ -240,12 +224,9 @@ describe('Alert element – ', () => {
     const placeholderText = 'I am a default alert with no attributes.';
 
     beforeEach(async () => {
-      testElement = createTestElement();
-      testElement.innerHTML = `
-        <cds-alert-group type="banner"><cds-alert closable>${placeholderText}</cds-alert></cds-alert-group>
-      `;
-
-      await waitForComponent('cds-alert');
+      testElement = await createTestElement(
+        html`<cds-alert-group type="banner"><cds-alert closable>${placeholderText}</cds-alert></cds-alert-group>`
+      );
       component = testElement.querySelector<CdsAlert>('cds-alert');
     });
 
@@ -273,12 +254,8 @@ describe('Alert element – ', () => {
       expect(component.status).toBe('loading');
       expect(component.shadowRoot.querySelector(alertStatusIconSelector)).toBeNull();
       expect(component.shadowRoot.querySelector('cds-icon')).toBeNull();
-      const spinner = component.shadowRoot.querySelector('.spinner');
+      const spinner = component.shadowRoot.querySelector('.alert-spinner');
       expect(spinner).not.toBeNull('loading status should show spinner');
-      expect(spinner.classList.contains('spinner-neutral-0')).toBe(
-        true,
-        'banner loading spinner should be white/neutral'
-      );
       const customAlertSlotContent = getComponentSlotContent(component);
       expect(customAlertSlotContent['alert-icon']).toBeUndefined();
     });
@@ -293,15 +270,13 @@ describe('Alert element – ', () => {
       component.shadowRoot.querySelector<CdsInternalCloseButton>('cds-internal-close-button');
 
     beforeEach(async () => {
-      testElement = createTestElement();
-      testElement.innerHTML = `
+      testElement = await createTestElement(html`
         <cds-alert alert-group-type="default">
           ${placeholderText}
           <cds-alert-actions>${placeholderActionsText}</cds-alert-actions>
         </cds-alert>
-      `;
+      `);
 
-      await waitForComponent('cds-alert');
       component = testElement.querySelector<CdsAlert>('cds-alert');
     });
 
@@ -364,13 +339,10 @@ describe('Alert element – ', () => {
   });
 
   describe('Aria: ', () => {
-    beforeEach(async () => {
-      testElement = createTestElement();
-      testElement.innerHTML = `
-        <cds-alert>${placeholderText}</cds-alert>
-      `;
+    let testElement: HTMLElement;
 
-      await waitForComponent('cds-alert');
+    beforeEach(async () => {
+      testElement = await createTestElement(html`<cds-alert>${placeholderText}</cds-alert>`);
       component = testElement.querySelector<CdsAlert>('cds-alert');
     });
 
@@ -411,7 +383,7 @@ describe('Alert element – ', () => {
 
       component.setAttribute('status', 'loading');
       await componentIsStable(component);
-      alertIcon = component.shadowRoot.querySelector('.spinner-inline');
+      alertIcon = component.shadowRoot.querySelector('.alert-spinner');
       expect(component.shadowRoot.querySelector('cds-icon.alert-icon')).toBeNull('verify loading status pt. 1');
       expect(alertIcon).not.toBeNull('verify loading status pt. 2');
       expect(alertIcon.getAttribute('aria-hidden')).toBe(

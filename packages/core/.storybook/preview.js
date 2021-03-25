@@ -3,6 +3,7 @@ import { setCustomElements } from '@storybook/web-components';
 import { applyPolyfill } from 'custom-elements-hmr-polyfill';
 import customElements from '../dist/core/custom-elements.json';
 
+window.HMR_SKIP_DEEP_PATCH = true;
 applyPolyfill();
 
 export const parameters = {
@@ -46,8 +47,28 @@ export const parameters = {
           'Toggle',
           'Date (Internal)',
         ],
+        'Components (Preview)',
+        ['Circular Progress', 'Divider'],
         'Utilities (Preview)',
-        'Internal APIs',
+        'Internal',
+        [
+          'Documentation',
+          [
+            'Getting Started',
+            'Package',
+            'Public API',
+            'Stateless API',
+            'Component Code Conventions',
+            'Imports and Dependencies',
+            'Registering Components',
+            'Templates and Styles',
+            'Content Projection',
+            'Using Icons',
+            'Accessibility',
+            'Unit Testing',
+          ],
+          'APIs',
+        ],
       ],
     },
   },

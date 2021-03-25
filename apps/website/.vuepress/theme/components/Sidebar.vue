@@ -1,7 +1,7 @@
 <template>
   <transition name="slide-fade">
     <div class="side-nav-container" v-show="isOpen" @click="checkOutsideClick($event)">
-      <nav class="clr-vertical-nav has-nav-groups side-nav" ref="nav">
+      <nav aria-label="Sidebar navigation" class="clr-vertical-nav has-nav-groups side-nav" ref="nav">
         <div class="nav-content">
           <template v-for="(item, index) in items">
             <div class="nav-group" v-if="item.children">
@@ -22,23 +22,16 @@
               >
                 <template v-for="childItem in item.children">
                   <router-link
+                    @focus.native="focusToggle(index)"
                     class="nav-link"
                     :to="childItem.path"
                     v-if="childItem.type !== 'external'"
-                    v-bind:class="{ active: childItem.path === activePage.path || childActive(childItem) }"
+                    v-bind:class="{
+                      active: isItemActive(childItem),
+                    }"
                   >
                     <span class="nav-text">{{ childItem.title }}</span>
                   </router-link>
-                  <a
-                    v-else-if="childItem.type === 'external'"
-                    :href="childItem.path"
-                    :target="childItem.target"
-                    class="nav-link"
-                  >
-                    <span class="nav-text"
-                      >{{ childItem.title }} <cds-icon class="external-link" size="12" shape="pop-out"></cds-icon
-                    ></span>
-                  </a>
                 </template>
               </div>
             </div>
@@ -110,6 +103,8 @@
 </style>
 
 <script>
+import { removePathExt } from '../util/remove-path-ext';
+
 export default {
   name: 'Sidebar',
   props: {
@@ -145,6 +140,19 @@ export default {
     toggle: function (index) {
       // This is because Vue can't detect changes mutated on an array, so this alerts it of changes
       this.$set(this.states, index, !this.states[index]);
+    },
+    focusToggle: function (index) {
+      if (this.states[index]) {
+        // already open
+        return;
+      } else {
+        // open when hidden item is focused
+        this.$set(this.states, index, !this.states[index]);
+      }
+    },
+    isItemActive: function (childItem) {
+      const childItemPath = removePathExt(childItem.path);
+      return childItemPath === this.activePage.path || this.activePage.path.startsWith(childItem.path + '/');
     },
     childActive: function (item) {
       let path = this.$page.path;

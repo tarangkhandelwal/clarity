@@ -13,7 +13,7 @@ Date Picker is a popover control for picking a date value for a date input. It's
 <p>Date Pickers aren’t helpful when the date is a known value like a birthday. A user will likely want to type that value in versus hunting for it in a Date Picker. In cases where space is limited, it may be a good idea to omit the Date Picker.</p>
 </div>
 <div class="clr-col doc-wrapper">
-<ClrImage src="/images/components/datepicker/datepicker.png" />
+<ClrImage src="/images/components/datepicker/basic-demo.png" />
 </div>
 </div>
 
@@ -92,7 +92,10 @@ For applications that use the ClrDateInput directive and the associated ClrDateC
 To use the date picker, add the [clrDate](/components/datepicker#clrdate) directive to an input field. Then, place the input inside the clr-date-container container element.
 
 ![Basic Datepicker](/images/components/datepicker/basic-demo.png)
-<doc-demo src="/demos/datepicker/basic-ng.html" />
+
+<doc-code>
+<<< .vuepress/public/demos/datepicker/basic-ng.html
+</doc-code>
 
 ### Min/Max Dates
 
@@ -103,13 +106,16 @@ Only dates inside the min/max range will be selectable for the input when there 
 The `min` and the `max` attributes can be used alone or together to have both an upper and a lower bound on accepted dates.
 
 ![Basic Datepicker](/images/components/datepicker/min-max-demo.png)
-<doc-demo src="/demos/datepicker/min-max-ng.html" />
+
+<doc-code>
+<<< .vuepress/public/demos/datepicker/min-max-ng.html
+</doc-code>
 
 ### Internationalization
 
 Clarity uses the [locale identifiers](https://github.com/angular/angular/tree/master/packages/common/locales) supported by Angular for getting the date format, first day of the week, month and day names. These values are used to generate the input field placeholder and the calendar.
 
-#### Placeholder
+### Placeholder
 
 Using the date format retrieved from Angular, the placeholder is generated in one of the following formats:
 {.custom-block}
@@ -191,7 +197,9 @@ The following demo shows two date pickers. The first date picker uses the `en-US
 
 Changing the locale requires its data to be registered first. Afterwards you can simply provide the locale in any Module or Component by the LOCALE_ID token.
 
-<doc-demo src="/demos/datepicker/i18n-ng.ts" />
+<doc-code>
+<<< .vuepress/public/demos/datepicker/i18n-ng.ts
+</doc-code>
 
 For more information on setting the locale parameter and loading the locale data, please read the Angular [internationalization](https://angular.io/guide/i18n) documentation.
 
@@ -211,26 +219,34 @@ You can add a two way binding on clrDate to access the date value. The benefit o
 <cds-alert>Date picker emits `null` when an invalid date is entered after a valid date was set.</cds-alert>
 </cds-alert-group>
 
-<doc-demo src="/demos/datepicker/js-date-object.html" />
+<doc-code>
+<<< .vuepress/public/demos/datepicker/js-date-object.html
+</doc-code>
 
-```
+```javascript
 // clrDate Output
-"2020-07-16T17:56:30.728Z"
+'2020-07-16T17:56:30.728Z';
 ```
 
 #### String: Template Driven
 
 Template Driven Forms use the `ngModel` directive to create a binding between the model and the input field.
 
-##### HTML
+#### HTML
 
-<doc-demo src="/demos/datepicker/template-driven.html" />
+<doc-code>
+<<< .vuepress/public/demos/datepicker/template-driven.html
+</doc-code>
 
-##### TypeScript
+#### TypeScript
 
-<doc-demo src="/demos/datepicker/template-driven.ts" />
+<doc-code>
+<<< .vuepress/public/demos/datepicker/template-driven.ts
+</doc-code>
 
-##### Example Output
+#### Example Output
+
+<doc-code>
 
 ```javascript
 {
@@ -238,24 +254,34 @@ Template Driven Forms use the `ngModel` directive to create a binding between th
 }
 ```
 
+</doc-code>
+
 #### String: Reactive Form
 
 Reactive Forms use FormControls to create the binding between the model and the input field.
 
 ##### HTML
 
-<doc-demo src="/demos/datepicker/reactive-date.html" />
+<doc-code>
+<<< .vuepress/public/demos/datepicker/reactive-date.html
+</doc-code>
 
 ##### TypeScript
 
-<doc-demo src="/demos/datepicker/reactive-date.ts" />
+<doc-code>
+<<< .vuepress/public/demos/datepicker/reactive-date.ts
+</doc-code>
 
 ##### Example Output
 
 The date value will be null until a user selects a date.
+
+<doc-code>
 
 ```javascript
 {
   "date": null
 }
 ```
+
+</doc-code>

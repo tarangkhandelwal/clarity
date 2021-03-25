@@ -47,6 +47,7 @@ export const status = () => {
       <cds-tag readonly status="success">Success</cds-tag>
       <cds-tag readonly status="warning">Warning</cds-tag>
       <cds-tag readonly status="danger">Danger</cds-tag>
+      <cds-tag disabled status="info">Disabled</cds-tag>
     </div>
   `;
 };
@@ -70,6 +71,7 @@ export const badgesStatus = () => {
       <cds-tag readonly status="success">Success <cds-badge status="success">2</cds-badge></cds-tag>
       <cds-tag readonly status="warning">Warning <cds-badge status="warning">3</cds-badge> </cds-tag>
       <cds-tag readonly status="danger">Danger <cds-badge status="danger">12</cds-badge></cds-tag>
+      <cds-tag disabled status="info">Disabled <cds-badge>12</cds-badge></cds-tag>
     </div>
   `;
 };
@@ -152,6 +154,35 @@ export const clickable = () => {
         >
       </div>
     </div>
+  `;
+};
+
+export const links = () => {
+  return html`
+    <div cds-layout="horizontal gap:sm p-b:lg">
+      <a href="javascript:void(0)" aria-label="example of a tag component using an anchor">
+        <cds-tag status="info">link</cds-tag>
+      </a>
+
+      <a href="javascript:void(0)" aria-label="example of a tag component using an anchor">
+        <cds-tag status="success">link <cds-badge status="info">1</cds-badge></cds-tag>
+      </a>
+
+      <a href="javascript:void(0)" aria-label="example of a tag component using an anchor">
+        <cds-tag status="warning"
+          ><cds-icon shape="user"></cds-icon> link <cds-badge status="info">1</cds-badge></cds-tag
+        >
+      </a>
+
+      <a href="javascript:void(0)" aria-label="example of a tag component using an anchor">
+        <cds-tag status="danger">link</cds-tag>
+      </a>
+    </div>
+
+    <a href="javascript:void(0)" cds-layout="horizontal gap:sm align:vertical-center">
+      <span cds-text="link">example with text</span>
+      <cds-tag>link</cds-tag>
+    </a>
   `;
 };
 

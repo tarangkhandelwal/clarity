@@ -327,7 +327,7 @@ Overflow is used when the button group is larger than its containing space, or u
 <div class="clr-row">
 
 <div class="clr-col-sm-12 clr-col-lg-6 doc-do">
-<div class="doc-example">
+<div class="doc-example" style="padding: 40px 0 130px 0">
 
 <div class="btn-group btn-primary">
   <button class="btn">Create</button>
@@ -356,7 +356,7 @@ Overflow is used when the button group is larger than its containing space, or u
 <div class="clr-row">
 
 <div class="clr-col-sm-12 clr-col-lg-6 doc-do">
-<div class="doc-example">
+<div class="doc-example" style="padding: 40px 0 130px 0">
 
 <div class="btn-group btn-primary">
   <button class="btn">Create</button>
@@ -377,7 +377,7 @@ Overflow is used when the button group is larger than its containing space, or u
 </div>
 
 <div class="clr-col-sm-12 clr-col-lg-6 doc-dont">
-<div class="doc-example">
+<div class="doc-example" style="padding: 40px 0 130px 0">
 
 <div class="btn-group btn-primary btn-icon">
   <button class="btn">
@@ -418,7 +418,7 @@ Use when you want similar actions to be grouped together and separated from othe
 <div class="clr-col-sm-12 clr-col-lg-6 doc-do">
 <div class="doc-example">
 
-<div class="btn-group btn-primary" style="margin-right: 12px">
+<div class="btn-group btn-primary" style="margin-right: 0.6rem">
   <button class="btn">Create</button>
   <button class="btn">Edit</button>
 </div>
@@ -435,7 +435,7 @@ Lead with primary actions followed by secondary actions.
 <div class="clr-col-sm-12 clr-col-lg-6 doc-dont">
 <div class="doc-example">
 
-<div class="btn-group btn-danger" style="margin-right: 12px">
+<div class="btn-group btn-danger" style="margin-right: 0.6rem">
   <button class="btn">Delete</button>
   <button class="btn">Stop</button>
 </div>
@@ -461,6 +461,8 @@ Use the clrInMenu input to determine if a button belongs in the overflow menu or
 
 #### Default position
 
+<doc-code>
+
 ```html
 <clr-button-group class="btn-primary">
   <clr-button>Create</clr-button>
@@ -471,7 +473,11 @@ Use the clrInMenu input to determine if a button belongs in the overflow menu or
 </clr-button-group>
 ```
 
+</doc-code>
+
 ### Menu Position
+
+<doc-code>
 
 ```html
 <clr-button-group class="btn-primary" [clrMenuPosition]="'bottom-right'">
@@ -483,13 +489,21 @@ Use the clrInMenu input to determine if a button belongs in the overflow menu or
 </clr-button-group>
 ```
 
+</doc-code>
+
 ## Accessibility
 
 If your icon button has no text, we recommend adding the **title="" attribute** to your icon buttons. This adds some
 additional context for users unfamiliar with what action your icon button might produce. The text should reflect the
 action.
 
-<doc-demo file="/demos/button-group/accessibility.html" />
+<doc-demo>
+!!!include(.vuepress/public/demos/button-group/accessibility.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/button-group/accessibility.html
+</doc-code>
 
 ## Code & Examples
 
@@ -503,53 +517,125 @@ Clarity [Buttons](/components/button) primary, outline and flat classes can be u
 
 ### Basic Structure
 
-<doc-demo file="/demos/button-group/basic-css.html" />
+<doc-demo>
+!!!include(.vuepress/public/demos/button-group/basic-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/button-group/basic-css.html
+</doc-code>
 
 ### Overflow
 
-<doc-demo file="/demos/button-group/overflow-css.html" />
+<doc-demo style="height: 6rem;">
+!!!include(.vuepress/public/demos/button-group/overflow-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/button-group/overflow-css.html
+</doc-code>
 
 ### Primary
 
-<doc-demo file="/demos/button-group/primary-css.html" />
+<doc-demo>
+!!!include(.vuepress/public/demos/button-group/primary-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/button-group/primary-css.html
+</doc-code>
 
 ### Outline
 
-<doc-demo file="/demos/button-group/outline-css.html" />
+<doc-demo>
+!!!include(.vuepress/public/demos/button-group/outline-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/button-group/outline-css.html
+</doc-code>
 
 ### Flat
 
-<doc-demo file="/demos/button-group/flat-css.html" />
+<doc-demo>
+!!!include(.vuepress/public/demos/button-group/flat-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/button-group/flat-css.html
+</doc-code>
 
 ### Small
 
-<doc-demo file="/demos/button-group/small-css.html" />
+<doc-demo>
+!!!include(.vuepress/public/demos/button-group/small-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/button-group/small-css.html
+</doc-code>
 
 ### Mixed
 
 Override a Button type in a Button Group by extending the Button type class directly on the corresponding Button.
 
-<doc-demo file="/demos/button-group/mixed-css.html" />
+<doc-demo>
+!!!include(.vuepress/public/demos/button-group/mixed-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/button-group/mixed-css.html
+</doc-code>
 
 ### Icons
 
 Text wrapped in `.clr-icon-title` is only displayed in the Overflow Menu.
 
-<doc-demo file="/demos/button-group/icons-css.html" />
+<doc-demo style="min-height: 7rem">
+!!!include(.vuepress/public/demos/button-group/icons-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/button-group/icons-css.html
+</doc-code>
 
 ### Icons with text
 
-<doc-demo file="/demos/button-group/icons-with-text-css.html" />
+<doc-demo style="min-height: 7rem">
+!!!include(.vuepress/public/demos/button-group/icons-with-text-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/button-group/icons-with-text-css.html
+</doc-code>
 
 ### Checkbox
 
-<doc-demo file="/demos/button-group/checkbox-css.html" />
+<doc-demo>
+!!!include(.vuepress/public/demos/button-group/checkbox-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/button-group/checkbox-css.html
+</doc-code>
 
 ### Radio
 
-<doc-demo file="/demos/button-group/radio-css.html" />
+<doc-demo>
+!!!include(.vuepress/public/demos/button-group/radio-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/button-group/radio-css.html
+</doc-code>
 
 ### Angular component
 
 Use the `clrInMenu` input to determine if a Button belongs in the Overflow Menu or not
-<doc-demo file="/demos/button-group/basic-ng.html" />
+<doc-demo>
+!!!include(.vuepress/public/demos/button-group/basic-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/button-group/basic-ng.html
+</doc-code>

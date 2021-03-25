@@ -5,6 +5,7 @@
  */
 
 import { html } from 'lit-html';
+import '@clr/core/divider/register.js';
 
 export default {
   title: 'Foundation/Layout/Stories',
@@ -196,6 +197,17 @@ export const horizontalLayoutAlignStretch = () => {
   `;
 };
 
+export const horizontalLayoutAlignResponsive = () => {
+  return html`
+    <cds-demo layout wide>
+      <div cds-layout="horizontal gap:md align@md:right align@lg:center">
+        <cds-placeholder>1</cds-placeholder>
+        <cds-placeholder>2</cds-placeholder>
+      </div>
+    </cds-demo>
+  `;
+};
+
 export const horizontalLayoutItemStretch = () => {
   return html`
     <cds-demo layout wide>
@@ -299,6 +311,16 @@ export const horizontalLayoutItemAlignLeft = () => {
         <cds-placeholder>1</cds-placeholder>
         <cds-placeholder cds-layout="align:left">2</cds-placeholder>
         <cds-placeholder>3</cds-placeholder>
+      </div>
+    </cds-demo>
+  `;
+};
+
+export const horizontalLayoutItemAlignResponsive = () => {
+  return html`
+    <cds-demo layout wide>
+      <div cds-layout="horizontal gap:md">
+        <cds-placeholder cds-layout="align@md:right align@lg:center">1</cds-placeholder>
       </div>
     </cds-demo>
   `;
@@ -556,6 +578,17 @@ export const verticalLayoutAlignStretch = () => {
   `;
 };
 
+export const verticalLayoutAlignResponsive = () => {
+  return html`
+    <cds-demo layout tall>
+      <div cds-layout="vertical gap:md align@md:bottom align@lg:center">
+        <cds-placeholder>1</cds-placeholder>
+        <cds-placeholder>2</cds-placeholder>
+      </div>
+    </cds-demo>
+  `;
+};
+
 export const verticalLayoutItemStretch = () => {
   return html`
     <cds-demo layout tall>
@@ -659,6 +692,16 @@ export const verticalLayoutItemAlignLeft = () => {
         <cds-placeholder>1</cds-placeholder>
         <cds-placeholder cds-layout="align:left">2</cds-placeholder>
         <cds-placeholder>3</cds-placeholder>
+      </div>
+    </cds-demo>
+  `;
+};
+
+export const verticalLayoutItemAlignResponsive = () => {
+  return html`
+    <cds-demo layout tall>
+      <div cds-layout="vertical gap:md">
+        <cds-placeholder cds-layout="align@md:bottom align@lg:center">1</cds-placeholder>
       </div>
     </cds-demo>
   `;
@@ -1463,6 +1506,7 @@ export const utilitiesContainers = () => {
       <cds-demo layout cds-layout="container:md">container:md (992px)</cds-demo>
       <cds-demo layout cds-layout="container:lg">container:lg (1200px)</cds-demo>
       <cds-demo layout cds-layout="container:xl">container:xl (1440px)</cds-demo>
+      <cds-demo layout cds-layout="container:fill">'container:fill' or 'fill' (width 100%)</cds-demo>
       <cds-demo layout cds-layout="container:xs container:center">container:xs container:center</cds-demo>
     </div>
   `;
@@ -1500,12 +1544,14 @@ export const patternsApplicationVerticalLayout = () => {
       </header>
       <div cds-layout="horizontal align:vertical-stretch wrap:none">
         <nav class="demo-sidenav" cds-layout="p:md p@md:lg">sidebar</nav>
+        <cds-divider class="demo-divider" orientation="vertical"></cds-divider>
         <div cds-layout="vertical align:stretch">
           <div class="demo-content demo-scrollable-content">
             <div cds-layout="vertical gap:md p:lg">
               ${scrollableContentHtml}
             </div>
           </div>
+          <cds-divider class="demo-divider"></cds-divider>
           <footer class="demo-footer" cds-layout="p-y:md p-x:lg">footer</footer>
         </div>
       </div>
@@ -1520,14 +1566,15 @@ export const patternsApplicationVerticalLayoutSubnav = () => {
         header
       </header>
       <div class="demo-subnav" cds-layout="p:md">subnav</div>
-      <div cds-layout="horizontal align:stretch">
-        <nav class="demo-sidenav" cds-layout="p:md p@md:lg align:shrink">sidebar</nav>
-        <div class="demo-content demo-scrollable-content" cds-layout="align:stretch">
-          <div cds-layout="vertical gap:md p:lg">
-            ${scrollableContentHtml}
-          </div>
+      <cds-divider class="demo-divider"></cds-divider>
+      <div cds-layout="horizontal align:vertical-stretch">
+        <nav class="demo-sidenav" cds-layout="p:md p@md:lg">sidebar</nav>
+        <cds-divider class="demo-divider" orientation="vertical"></cds-divider>
+        <div class="demo-content demo-scrollable-content" cds-layout="vertical gap:md p:lg align:stretch">
+          ${scrollableContentHtml}
         </div>
       </div>
+      <cds-divider class="demo-divider"></cds-divider>
       <footer class="demo-footer" cds-layout="p:md p@md:lg align:shrink">footer</footer>
     </div>
   `;
@@ -1535,25 +1582,26 @@ export const patternsApplicationVerticalLayoutSubnav = () => {
 
 export const patternsApplicationVerticalIconLayout = () => {
   return html`
-    <div class="demo-layout demo-app-layout" cds-layout="horizontal wrap:none">
-      <header class="demo-header demo-alt-header" cds-layout="p:md vertical gap:lg">
+    <div class="demo-layout demo-app-layout" cds-layout="horizontal wrap:none align:vertical-stretch">
+      <header class="demo-header demo-alt-header" cds-layout="vertical gap:lg p:md">
         <cds-icon shape="applications" size="lg" inverse></cds-icon>
         <cds-icon shape="blocks-group" size="lg" inverse></cds-icon>
         <cds-icon shape="bundle" size="lg" inverse></cds-icon>
         <cds-icon shape="building" size="lg" inverse></cds-icon>
         <cds-icon shape="cog" size="lg" inverse cds-layout="align:bottom"></cds-icon>
       </header>
-      <div cds-layout="horizontal gap:none align:stretch wrap:none">
+      <div cds-layout="horizontal gap:none align:vertical-stretch wrap:none">
         <nav class="demo-sidenav" cds-layout="p:md align:shrink">
           <p cds-text="section">sidebar</p>
         </nav>
+        <cds-divider class="demo-divider" orientation="vertical"></cds-divider>
         <div cds-layout="vertical align:stretch">
-          <div class="demo-header demo-alt-content-header" cds-layout="p:md align:shrink">header</div>
-          <div class="demo-content demo-scrollable-content demo-alt-content" cds-layout="align:stretch">
-            <div cds-layout="vertical gap:md p:lg">
-              ${scrollableContentHtml}
-            </div>
+          <div class="demo-header demo-alt-content-header" cds-layout="p:md">header</div>
+          <cds-divider class="demo-divider"></cds-divider>
+          <div class="demo-content demo-scrollable-content demo-alt-content" cds-layout="vertical gap:md p:lg">
+            ${scrollableContentHtml}
           </div>
+          <cds-divider class="demo-divider"></cds-divider>
           <footer class="demo-footer" cds-layout="p:md align:shrink">footer</footer>
         </div>
       </div>
@@ -1563,7 +1611,7 @@ export const patternsApplicationVerticalIconLayout = () => {
 
 export const patternsApplicationVerticalIconLayoutHybrid = () => {
   return html`
-    <div class="demo-layout demo-app-layout" cds-layout="horizontal wrap:none">
+    <div class="demo-layout demo-app-layout" cds-layout="horizontal wrap:none align:vertical-stretch">
       <header class="demo-header demo-alt-header-2" cds-layout="p:md vertical gap:lg">
         <cds-icon shape="applications" size="lg" inverse></cds-icon>
         <cds-icon shape="blocks-group" size="lg" inverse></cds-icon>
@@ -1572,18 +1620,18 @@ export const patternsApplicationVerticalIconLayoutHybrid = () => {
         <cds-icon shape="cog" size="lg" inverse cds-layout="align:bottom"></cds-icon>
       </header>
       <div cds-layout="vertical align:stretch">
-        <header class="demo-header" cds-layout="p:md p@md:lg align:shrink">
+        <header class="demo-header" cds-layout="p:md p@md:lg">
           header
         </header>
-        <div cds-layout="horizontal align:stretch">
-          <nav class="demo-sidenav" cds-layout="p:md p@md:lg align:shrink">sidebar</nav>
-          <div class="demo-content demo-scrollable-content" cds-layout="align:stretch">
-            <div cds-layout="vertical gap:md p:lg">
-              ${scrollableContentHtml}
-            </div>
+        <div cds-layout="horizontal align:vertical-stretch">
+          <nav class="demo-sidenav" cds-layout="p:md p@md:lg">sidebar</nav>
+          <cds-divider class="demo-divider" orientation="vertical"></cds-divider>
+          <div class="demo-content demo-scrollable-content" cds-layout="vertical gap:md p:lg align:stretch">
+            ${scrollableContentHtml}
           </div>
         </div>
-        <footer class="demo-footer" cds-layout="p:md p@md:lg align:shrink">footer</footer>
+        <cds-divider class="demo-divider"></cds-divider>
+        <footer class="demo-footer" cds-layout="p:md p@md:lg">footer</footer>
       </div>
     </div>
   `;
@@ -1591,16 +1639,19 @@ export const patternsApplicationVerticalIconLayoutHybrid = () => {
 
 export const patternsContentSiteThreeColumn = () => {
   return html`
-    <div class="demo-layout" cds-layout="vertical align:stretch" style="height: 100vh">
-      <header class="demo-header" cds-layout="p:md p@md:lg align:shrink">
+    <div class="demo-layout" cds-layout="vertical align:horizontal-stretch" style="height: 100vh">
+      <header class="demo-header" cds-layout="p:md p@md:lg">
         header
       </header>
       <div cds-layout="horizontal align:vertical-stretch" class="demo-content">
         <nav class="demo-sidenav" cds-layout="p:md p@md:lg">sidebar</nav>
+        <cds-divider class="demo-divider" orientation="vertical"></cds-divider>
         <div class="demo-content" cds-layout="p:md p@md:lg align:stretch">content</div>
+        <cds-divider class="demo-divider" orientation="vertical"></cds-divider>
         <section class="demo-sidebar" cds-layout="p:md p@md:lg">sidebar</section>
       </div>
-      <footer class="demo-footer" cds-layout="p:md p@md:lg align:shrink">footer</footer>
+      <cds-divider class="demo-divider"></cds-divider>
+      <footer class="demo-footer" cds-layout="p:md p@md:lg">footer</footer>
     </div>
   `;
 };
@@ -1663,23 +1714,21 @@ export const patternsResponsiveImageGallery = () => {
       <header class="demo-header" cds-layout="p:md p@md:lg">
         header
       </header>
-      <div
-        cds-layout="grid cols@sm:6 cols@md:4 cols@lg:3 cols@xl:2 p:lg gap:md align:horizontal-stretch"
-        class="demo-content"
-      >
-        <img src="https://dummyimage.com/600x400/000/fff" alt="placeholder image" cds-layout="container:fill" />
-        <img src="https://dummyimage.com/600x400/000/fff" alt="placeholder image" cds-layout="container:fill" />
-        <img src="https://dummyimage.com/600x400/000/fff" alt="placeholder image" cds-layout="container:fill" />
-        <img src="https://dummyimage.com/600x400/000/fff" alt="placeholder image" cds-layout="container:fill" />
-        <img src="https://dummyimage.com/600x400/000/fff" alt="placeholder image" cds-layout="container:fill" />
-        <img src="https://dummyimage.com/600x400/000/fff" alt="placeholder image" cds-layout="container:fill" />
-        <img src="https://dummyimage.com/600x400/000/fff" alt="placeholder image" cds-layout="container:fill" />
-        <img src="https://dummyimage.com/600x400/000/fff" alt="placeholder image" cds-layout="container:fill" />
-        <img src="https://dummyimage.com/600x400/000/fff" alt="placeholder image" cds-layout="container:fill" />
-        <img src="https://dummyimage.com/600x400/000/fff" alt="placeholder image" cds-layout="container:fill" />
-        <img src="https://dummyimage.com/600x400/000/fff" alt="placeholder image" cds-layout="container:fill" />
-        <img src="https://dummyimage.com/600x400/000/fff" alt="placeholder image" cds-layout="container:fill" />
+      <div cds-layout="grid cols@sm:6 cols@md:4 cols@lg:3 cols@xl:2 p:lg gap:md" class="demo-content">
+        <img src="https://dummyimage.com/600x400/000/fff" alt="placeholder image" cds-layout="fill" />
+        <img src="https://dummyimage.com/600x400/000/fff" alt="placeholder image" cds-layout="fill" />
+        <img src="https://dummyimage.com/600x400/000/fff" alt="placeholder image" cds-layout="fill" />
+        <img src="https://dummyimage.com/600x400/000/fff" alt="placeholder image" cds-layout="fill" />
+        <img src="https://dummyimage.com/600x400/000/fff" alt="placeholder image" cds-layout="fill" />
+        <img src="https://dummyimage.com/600x400/000/fff" alt="placeholder image" cds-layout="fill" />
+        <img src="https://dummyimage.com/600x400/000/fff" alt="placeholder image" cds-layout="fill" />
+        <img src="https://dummyimage.com/600x400/000/fff" alt="placeholder image" cds-layout="fill" />
+        <img src="https://dummyimage.com/600x400/000/fff" alt="placeholder image" cds-layout="fill" />
+        <img src="https://dummyimage.com/600x400/000/fff" alt="placeholder image" cds-layout="fill" />
+        <img src="https://dummyimage.com/600x400/000/fff" alt="placeholder image" cds-layout="fill" />
+        <img src="https://dummyimage.com/600x400/000/fff" alt="placeholder image" cds-layout="fill" />
       </div>
+      <cds-divider class="demo-divider"></cds-divider>
       <footer class="demo-footer" cds-layout="p:md p@md:lg">footer</footer>
     </div>
   `;

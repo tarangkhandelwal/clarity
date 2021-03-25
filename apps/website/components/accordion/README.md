@@ -41,7 +41,11 @@ Leverage our optional `*clrIfExpanded` structural directive on the `clr-accordio
 
 A basic accordion is made up of a set of panels, each with a title and content.
 
-<doc-demo src="/demos/accordion/basic.html""></doc-demo>
+<ClrImage src="/images/components/accordion/accordion.png" />
+
+<doc-code>
+<<< .vuepress/public/demos/accordion/basic.html
+</doc-code>
 
 ## Accessibility
 

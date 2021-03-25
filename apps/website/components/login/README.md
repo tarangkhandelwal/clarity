@@ -7,8 +7,14 @@ A predefined form for applications that require authentication as part of the lo
 
 ## Usage
 
-The login form is flexible and should be customized removing or adding = elements as needed to suit a specific use case.
-<doc-demo src="/demos/login/login-ng.html" demo="/demos/login/login-css.html" />
+The login form is flexible and should be customized removing or adding elements as needed to suit a specific use case.
+<doc-demo>
+!!!include(.vuepress/public/demos/login/login-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/login/login-ng.html
+</doc-code>
 
 ### Validation
 

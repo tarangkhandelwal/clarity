@@ -29,7 +29,7 @@ When establishing your navigation model, consider:
 
 #### Header
 
-<ClrImage cds-layout="m-t:md" title="Header navigation pattern" src="/images/foundation/navigation/header.png" />
+<ClrImage cds-layout="m-t:md" title="An image showing the viewport with header container element placement at the top of a viewport. There is a dotted blue line around the header element." src="/images/foundation/navigation/header.png" />
 </div>
 <div class="clr-col" cds-layout="m-t:xl">
 
@@ -49,7 +49,7 @@ Conversely, the header supports other items (search and setting) and the navigat
 
 #### Subnav
 
-<ClrImage cds-layout="m-t:md" title="Subnav navigation pattern" src="/images/foundation/navigation/subnav.png" />
+<ClrImage cds-layout="m-t:md" title="An image showing the viewport with a subnav container element. There is a dotted blue line around the subnav element." src="/images/foundation/navigation/subnav.png" />
 </div>
 <div class="clr-col" cds-layout="m-t:xl">
 
@@ -69,7 +69,7 @@ Use the <a href="/components/subnav">subnav</a> for primary navigation when you 
 
 #### Sidenav
 
-<ClrImage cds-layout="m-t:md" title="Sidenav navigation pattern" src="/images/foundation/navigation/sidenav.png" />
+<ClrImage cds-layout="m-t:md" title="An image showing the viewport with a sidenav container element placed on the left side of the viewport. There is a dotted blue line around the sidenav element." src="/images/foundation/navigation/sidenav.png" />
 </div>
 <div class="clr-col" cds-layout="m-t:xl">
 
@@ -94,7 +94,7 @@ Conversely, the sidenav takes real estate away from the content area. Also, on m
 
 #### Header + Sidenav
 
-<ClrImage cds-layout="m-t:md" title="Header + Sidenav navigation pattern" src="/images/foundation/navigation/header_sidenav.png" />
+<ClrImage cds-layout="m-t:md" title="An image showing the viewport with a sidenav container element placed under the header and on the left side of the viewport. There is a dotted blue line around the both the sidenav element and the header element." src="/images/foundation/navigation/header_sidenav.png" />
 </div>
 <div class="clr-col" cds-layout="m-t:xl">
 
@@ -110,7 +110,7 @@ A common pattern for two levels of navigation. The primary navigation is in the 
 
 #### Header + Subnav
 
-<ClrImage cds-layout="m-t:md" title="Header + Subnav navigation pattern" src="/images/foundation/navigation/header_subnav.png" />
+<ClrImage cds-layout="m-t:md" title="An image showing the viewport with a subnav container element placed under the header. There is a dotted blue line around the both the subnav element and the header element." src="/images/foundation/navigation/header_subnav.png" />
 </div>
 <div class="clr-col" cds-layout="m-t:xl">
 
@@ -126,7 +126,7 @@ Because both patterns are horizontal, use this combination only when the seconda
 
 #### Subnav + Sidenav
 
-<ClrImage cds-layout="m-t:md" title="Subnav + Sidenav navigation pattern" src="/images/foundation/navigation/subnav_sidenav.png" />
+<ClrImage cds-layout="m-t:md" title="An image showing the viewport with a sidenav container element underneath a subnav container element. There is a dotted blue line around the both the subnav container element and the sidenav container element." src="/images/foundation/navigation/header_subnav.png" />
 </div>
 <div class="clr-col" cds-layout="m-t:xl">
 
@@ -142,7 +142,7 @@ Use the subnav for primary navigation when the links do not fit in the header.
 
 #### Header, subnav and sidenav
 
-<ClrImage cds-layout="m-t:md" title="Header, subnav and sidenav navigation pattern" src="/images/foundation/navigation/header_subnav_sidenav.png" />
+<ClrImage cds-layout="m-t:md" title="An image showing the viewport with a sidenav container element underneath a subnav container element and the subnav container element is under the header container. There is a dotted blue line around the the subnav container element, the sidenav container element and the header container element." src="/images/foundation/navigation/header_subnav_sidenav.png" />
 </div>
 <div class="clr-col" cds-layout="m-t:xl">
 
@@ -161,28 +161,58 @@ Clarity has three navigation components: header, subnav, and sidenav. Following 
 
 When Header is the primary navigation and subnav is the secondary navigation combine the [Header](/component/header) component with the [subnav](/components/header#subnav) component using the DOM structure shown in code examples.
 // Need code+demo here w/ subnav
-<doc-demo src="/demos/navigation/header-subnav-ng.html" demo="/demos/navigation/header-subnav-css.html" />
+<doc-demo>
+!!!include(.vuepress/public/demos/navigation/header-subnav-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/navigation/header-subnav-ng.html
+</doc-code>
 
 ### Header + Sidenav
 
 When header is the primary navigation and sidenav is the secondary navigation combine the [Header](/component/header) component with the [sidenav](/components/sidenav) component using the DOM structure shown in code examples.
-<doc-demo src="/demos/navigation/header-sidenav-ng.html" demo="/demos/navigation/header-sidenav-css.html" />
+<doc-demo>
+!!!include(.vuepress/public/demos/navigation/header-sidenav-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/navigation/header-sidenav-ng.html
+</doc-code>
 
 ### Header
 
 When there are only a few locations for users to navigate to use a header as the sole navigation element between pages.
-<doc-demo src="/demos/navigation/header-ng.html" demo="/demos/navigation/header-css.html" />
+<doc-demo>
+!!!include(.vuepress/public/demos/navigation/header-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/navigation/header-ng.html
+</doc-code>
 
 ### Sidnav
 
 When there are more links that can fit into the header or a subnav consider using the sidnav only and combining the navigation into organized groups of locations.
 
-<doc-demo src="/demos/navigation/sidenav-ng.html" demo="/demos/navigation/sidenav-css.html" />
+<doc-demo>
+!!!include(.vuepress/public/demos/navigation/sidenav-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/navigation/sidenav-ng.html
+</doc-code>
 
 ### Subnav + Sidnav
 
 When top level locations have child navigation locations combine subnav with side nav elements specific to each top level location.
-<doc-demo src="/demos/navigation/subnav-sidenav-ng.html" demo="/demos/navigation/subnav-sidenav-css.html" />
+<doc-demo>
+!!!include(.vuepress/public/demos/navigation/subnav-sidenav-css.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/navigation/subnav-sidenav-ng.html
+</doc-code>
 
 ## Behavior
 
@@ -219,12 +249,16 @@ Clarity supports responsive navigation as follows:
 
 <DocVideo src="/images/foundation/navigation/navLevel1.mp4" :width="468" :autoplay="true"></DocVideo>
 
-<doc-demo src="/demos/navigation/nav-1-css.html" />
+<doc-code>
+<<< .vuepress/public/demos/navigation/nav-1-css.html
+</doc-code>
 </div>
 <div class="clr-col">
 
 <DocVideo src="/images/foundation/navigation/navLevel2.mp4" :width="468" :autoplay="true"></DocVideo>
-<doc-demo src="/demos/navigation/nav-2-css.html" />
+<doc-code>
+<<< .vuepress/public/demos/navigation/nav-2-css.html
+</doc-code>
 
 </div>
 </div>

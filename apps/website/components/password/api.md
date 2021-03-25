@@ -3,13 +3,13 @@ title: API
 toc: true
 ---
 
-Use checkboxes when users need to select multiple options in a list of related options.
-
 ## Angular Components
 
 ### ClrPassword
 
 #### Selector & Basic Usage
+
+<doc-code>
 
 ```html
 <form clrForm>
@@ -18,6 +18,8 @@ Use checkboxes when users need to select multiple options in a list of related o
   </clr-password-container>
 </form>
 ```
+
+</doc-code>
 
 #### Bindings
 

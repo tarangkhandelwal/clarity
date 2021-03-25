@@ -4,12 +4,14 @@
  * The full license information can be found in LICENSE in the root directory of this project.
  */
 
+import { html } from 'lit-html';
 import { createTestElement, removeTestElement } from '@clr/core/test/utils';
 import {
   addAttributeValue,
   assignSlotNames,
   getElementWidth,
   getElementWidthUnless,
+  hasAttributeAndIsNotEmpty,
   HTMLAttributeTuple,
   isHTMLElement,
   removeAttributes,
@@ -17,6 +19,7 @@ import {
   setAttributes,
   listenForAttributeChange,
   isVisible,
+  spanWrapper,
 } from './dom.js';
 
 describe('Functional Helper: ', () => {
@@ -24,8 +27,8 @@ describe('Functional Helper: ', () => {
     let testElement: HTMLElement;
     const elementWidth = '100px';
 
-    beforeEach(() => {
-      testElement = createTestElement();
+    beforeEach(async () => {
+      testElement = await createTestElement();
       testElement.style.width = elementWidth;
     });
 
@@ -46,8 +49,8 @@ describe('Functional Helper: ', () => {
     let testElement: HTMLElement;
     const elementWidth = '100px';
 
-    beforeEach(() => {
-      testElement = createTestElement();
+    beforeEach(async () => {
+      testElement = await createTestElement();
       testElement.style.width = elementWidth;
     });
 
@@ -67,8 +70,8 @@ describe('Functional Helper: ', () => {
   describe('isHTMLElement() ', () => {
     let testElement: any;
 
-    it('returns true if it is an HTMLElement', () => {
-      testElement = createTestElement();
+    it('returns true if it is an HTMLElement', async () => {
+      testElement = await createTestElement();
       expect(isHTMLElement(testElement)).toEqual(true);
     });
 
@@ -90,8 +93,8 @@ describe('Functional Helper: ', () => {
     let testElement: HTMLElement;
     const attrName = 'myAttr';
 
-    beforeEach(() => {
-      testElement = createTestElement();
+    beforeEach(async () => {
+      testElement = await createTestElement();
     });
 
     afterEach(() => {
@@ -125,8 +128,8 @@ describe('Functional Helper: ', () => {
       ['data-attr', 'stringified data goes here'],
     ];
 
-    beforeEach(() => {
-      testElement = createTestElement();
+    beforeEach(async () => {
+      testElement = await createTestElement();
     });
 
     afterEach(() => {
@@ -200,8 +203,8 @@ describe('Functional Helper: ', () => {
       ['data-attr', 'stringified data goes here'],
     ];
 
-    beforeEach(() => {
-      testElement = createTestElement();
+    beforeEach(async () => {
+      testElement = await createTestElement();
       setAttributes(testElement, ...testAttrs);
     });
 
@@ -234,10 +237,12 @@ describe('Functional Helper: ', () => {
     let testDiv3: null;
     let testDiv4: HTMLElement;
 
-    beforeEach(() => {
-      testElement = createTestElement();
-      testElement.innerHTML =
-        '<div id="testDiv1">ohai</div><div id="testDiv2">kthxbye</div><div id="testDiv4">omye</div>';
+    beforeEach(async () => {
+      testElement = await createTestElement(
+        html`<div id="testDiv1">ohai</div>
+          <div id="testDiv2">kthxbye</div>
+          <div id="testDiv4">omye</div>`
+      );
       testDiv1 = testElement.querySelector('#testDiv1');
       testDiv2 = testElement.querySelector('#testDiv2');
       testDiv3 = testElement.querySelector('#testDiv3');
@@ -286,8 +291,8 @@ describe('Functional Helper: ', () => {
       ['data-attr', 'stringified data goes here'],
     ];
 
-    beforeEach(() => {
-      testElement = createTestElement();
+    beforeEach(async () => {
+      testElement = await createTestElement();
       setAttributes(testElement, ...testAttrs);
     });
 
@@ -315,8 +320,8 @@ describe('Functional Helper: ', () => {
   });
 
   describe('listenForAttributeChange', () => {
-    it('executes callback when observed attribute changes', done => {
-      const element = createTestElement();
+    it('executes callback when observed attribute changes', async done => {
+      const element = await createTestElement();
       expect(element.getAttribute('name')).toBe(null);
 
       listenForAttributeChange(element, 'name', id => {
@@ -330,8 +335,8 @@ describe('Functional Helper: ', () => {
   });
 
   describe('isVisible', () => {
-    it('determines if element is visible', () => {
-      const element = createTestElement();
+    it('determines if element is visible', async () => {
+      const element = await createTestElement();
       element.style.width = '100px';
       element.style.height = '100px';
 
@@ -342,6 +347,37 @@ describe('Functional Helper: ', () => {
 
       removeTestElement(element);
       expect(isVisible(element)).toBe(false);
+    });
+  });
+
+  describe('spanWrapper', () => {
+    it('wraps text nodes in an element', async () => {
+      const element = await createTestElement(html`Hello spanWrapper`);
+      spanWrapper(element.childNodes);
+      expect(element.children[0].tagName).toBe('SPAN');
+      expect(element.children[0].textContent).toBe('Hello spanWrapper');
+    });
+  });
+
+  describe('hasAttributeAndIsNotEmpty', () => {
+    it('should return false if element does not exist', () => {
+      const nope = document.getElementById('ohai');
+      expect(hasAttributeAndIsNotEmpty(nope, 'id')).toBe(false);
+    });
+    it('should return true if element has attribute', async () => {
+      const element = await createTestElement(html`<div id="ohai" data-test-value="false">howdy</div>`);
+      expect(hasAttributeAndIsNotEmpty(document.getElementById('ohai'), 'data-test-value')).toBe(true);
+      removeTestElement(element);
+    });
+    it('should return false if element has attribute but it is an empty string', async () => {
+      const element = await createTestElement(html`<div id="ohai" data-test-value="">howdy</div>`);
+      expect(hasAttributeAndIsNotEmpty(document.getElementById('ohai'), 'data-test-value')).toBe(false);
+      removeTestElement(element);
+    });
+    it('should return false if element has attribute but there is no value in the attribute', async () => {
+      const element = await createTestElement(html`<div id="ohai" data-test-value>howdy</div>`);
+      expect(hasAttributeAndIsNotEmpty(document.getElementById('ohai'), 'data-test-value')).toBe(false);
+      removeTestElement(element);
     });
   });
 });

@@ -3,13 +3,13 @@ title: API
 toc: true
 ---
 
-Use checkboxes when users need to select multiple options in a list of related options.
-
 ## Angular Components
 
 ### ClrDatalist
 
 #### Selector & Basic Usage
+
+<doc-code>
 
 ```html
 <form clrForm>
@@ -21,6 +21,8 @@ Use checkboxes when users need to select multiple options in a list of related o
   </clr-datalist-container>
 </form>
 ```
+
+</doc-code>
 
 #### Bindings
 

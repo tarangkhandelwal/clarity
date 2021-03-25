@@ -1,9 +1,6 @@
 @import './../styles/tokens/generated/index';
 @import './../styles/mixins/mixins';
 
-// TODO: progress spinner CSS deprecated, will be replaced by cds-circular-progress
-@import './../styles/utils/legacy-spinner';
-
 $lightweight-alert-line-height: $cds-token-typography-body-line-height;
 
 :host {
@@ -20,11 +17,6 @@ $lightweight-alert-line-height: $cds-token-typography-body-line-height;
 
 .private-host {
   min-height: var(--min-height);
-}
-
-slot[name='close-button'],
-slot[name='alert-icon'] {
-  line-height: 0;
 }
 
 :host([type='default']) {
@@ -125,8 +117,7 @@ cds-internal-close-button {
 }
 
 :host([type='banner']) {
-  .alert-content,
-  .alert-content slot {
+  .alert-content {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

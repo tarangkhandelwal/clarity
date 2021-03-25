@@ -11,12 +11,16 @@ toc: true
 
 #### Selector & Basic Usage
 
+<doc-code>
+
 ```html
 <clr-vertical-nav>
   <!-- clrVerticalNavLink elements as needed-->
   <!-- clr-nav-group components as needed -->
 </clr-vertical-nav>
 ```
+
+</doc-code>
 
 #### Bindings
 
@@ -30,6 +34,8 @@ toc: true
 
 #### Selector & Basic Usage
 
+<doc-code>
+
 ```html
 <clr-vertical-nav>
   <clr-vertical-nav-group>
@@ -40,6 +46,8 @@ toc: true
 </clr-vertical-nav>
 ```
 
+</doc-code>
+
 #### Bindings
 
 <DocComponentApi component="ClrVerticalNavGroup" item="bindings" />
@@ -47,6 +55,8 @@ toc: true
 ### ClrNavGroupChildren
 
 #### Selector & Basic Usage
+
+<doc-code>
 
 ```html
 <clr-vertical-nav>
@@ -62,6 +72,8 @@ toc: true
 </clr-vertical-nav>
 ```
 
+</doc-code>
+
 #### Bindings
 
 <DocComponentApi component="ClrNavGroupChildren" item="bindings" />
@@ -76,6 +88,8 @@ toc: true
 
 #### Selector & Basic Usage
 
+<doc-code>
+
 ```html
 <clr-vertical-nav>
   <a clrVerticalNavLink routerLink="./users" routerLinkActive="active">Users</a>
@@ -85,9 +99,13 @@ toc: true
 </clr-vertical-nav>
 ```
 
+</doc-code>
+
 ### ClrVerticalNavIcon
 
 #### Selector & Basic Usage
+
+<doc-code>
 
 ```html
 <clr-vertical-nav>
@@ -101,3 +119,5 @@ toc: true
   </a>
 </clr-vertical-nav>
 ```
+
+</doc-code>

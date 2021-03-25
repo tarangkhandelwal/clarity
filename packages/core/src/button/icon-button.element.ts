@@ -4,19 +4,11 @@
  * The full license information can be found in LICENSE in the root directory of this project.
  */
 
-import {
-  assignSlotNames,
-  baseStyles,
-  iconSlot,
-  iconSpinner,
-  iconSpinnerCheck,
-  property,
-  setAttributes,
-} from '@clr/core/internal';
+import { baseStyles, property, addClassnames } from '@clr/core/internal';
 import { html } from 'lit-element';
 import { styles as baseButtonStyles } from './base-button.element.css.js';
 import { styles } from './icon-button.element.css.js';
-import { CdsButton, ClrLoadingState } from './button.element.js';
+import { CdsButton, ClrLoadingState, iconCheck, iconSpinner } from './button.element.js';
 
 /**
  * Icon buttons give applications a compact alternative to communicate action and direct user intent.
@@ -53,28 +45,20 @@ export class CdsIconButton extends CdsButton {
   ariaLabel: string;
 
   connectedCallback() {
-    setAttributes(this, ['aria-hidden', 'true']);
-
-    // have to override default behavior when an anchor is passed into the icon button
     super.connectedCallback();
-    if (this.anchor) {
-      // removes slot designation from icon and adds it to the anchor tag
-      assignSlotNames([this.icon, false], [this.anchor, 'button-icon']);
-
-      // we need a class on the icon because that's how the icon element knows to style itself
-      // we can't style it from the icon-button anymore because it's a nested+slotted element
-      if (this.icon) {
-        this.icon.classList.add('anchored-icon');
-      }
+    // we need a class on the icon because that's how the icon element knows to style itself
+    // we can't style it from the icon-button anymore because it's a nested+slotted element
+    if (this.anchor && this.icon) {
+      addClassnames(this.icon, 'anchored-icon');
     }
   }
 
   render() {
     return html`
       <div class="private-host">
-        ${this.loadingState === ClrLoadingState.LOADING ? iconSpinner : ''}
-        ${this.loadingState === ClrLoadingState.SUCCESS ? iconSpinnerCheck : ''}
-        ${this.loadingState === ClrLoadingState.DEFAULT ? iconSlot : ''} ${this.hiddenButtonTemplate}
+        ${this.loadingState === ClrLoadingState.LOADING ? iconSpinner(this.size) : ''}
+        ${this.loadingState === ClrLoadingState.SUCCESS ? iconCheck : ''}
+        ${this.loadingState === ClrLoadingState.DEFAULT ? html`<slot></slot>` : ''} ${this.hiddenButtonTemplate}
       </div>
     `;
   }

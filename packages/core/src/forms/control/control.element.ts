@@ -146,7 +146,7 @@ export class CdsControl extends LitElement {
 
   @query('.suffix') private suffixAction: HTMLElement;
 
-  @query('slot[name=message]') private messageSlot: HTMLElement;
+  @query('.messages') private messageSlot: HTMLElement;
 
   @event() layoutChange: EventEmitter<ControlLayout>;
 
@@ -158,7 +158,7 @@ export class CdsControl extends LitElement {
 
   render() {
     return html`
-      ${this.hiddenLabel ? html`<slot name="label" cds-layout="display:screen-reader-only"></slot>` : ''}
+      ${this.hiddenLabel ? html`<span cds-layout="display:screen-reader-only"><slot name="label"></slot></span>` : ''}
       <div
         cds-layout="${this.layout === 'vertical' ? 'vertical gap:sm' : 'horizontal gap:lg'} align:stretch"
         class="private-host ${this.isRTL ? 'rtl' : ''}"
@@ -216,11 +216,11 @@ export class CdsControl extends LitElement {
   }
 
   protected get messagesTemplate() {
-    return html`<slot
-      name="message"
-      cds-layout="${this.layout === 'compact' ? 'align:shrink' : ''}"
-      class="messages"
-    ></slot>`;
+    return html`
+      <div cds-layout="${this.layout === 'compact' ? 'align:shrink' : ''}" class="messages">
+        <slot name="message"></slot>
+      </div>
+    `;
   }
 
   private get prefixTemplate() {

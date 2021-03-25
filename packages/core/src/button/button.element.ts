@@ -4,55 +4,31 @@
  * The full license information can be found in LICENSE in the root directory of this project.
  */
 
-import {
-  assignSlotNames,
-  badgeSlot,
-  baseStyles,
-  CdsBaseButton,
-  getElementWidth,
-  iconSpinner,
-  iconSpinnerCheck,
-  iconSlot,
-  property,
-} from '@clr/core/internal';
+import { baseStyles, CdsBaseButton, getElementWidth, property, spanWrapper } from '@clr/core/internal';
 import { ClarityIcons } from '@clr/core/icon/icon.service.js';
 import { errorStandardIcon } from '@clr/core/icon/shapes/error-standard.js';
 import { html, query } from 'lit-element';
 import { styles as baseButtonStyles } from './base-button.element.css.js';
 import { styles } from './button.element.css.js';
 
-// TODO: when we migrate away from the base64 icons in other states, we will need to either move the consts
-// into this file or move the base button here. pulling cds-icons into core/internal creates a circular dependency
-const iconSpinnerError = html`<span class="button-status-icon" cds-layout="horizontal align:center"
+export const iconSpinner = (size: string) => {
+  const spinnerSize = size === 'sm' ? '12' : '18';
+  return html`<span class="button-status-icon" cds-layout="horizontal align:center"><cds-progress-circle class="button-spinner" size="${spinnerSize}"></cds-progress-circle></span></span>`;
+};
+
+export const iconCheck = html`<span class="button-status-icon" cds-layout="horizontal align:center"
+  ><cds-icon shape="check" status="success" cds-layout="align:center"></cds-icon
+></span>`;
+
+export const iconError = html`<span class="button-status-icon" cds-layout="horizontal align:center"
   ><cds-icon shape="error-standard" cds-layout="align:center"></cds-icon
 ></span>`;
 
-export enum ClrLoadingState {
+export const enum ClrLoadingState {
   DEFAULT = 'default',
   LOADING = 'loading',
   SUCCESS = 'success',
   ERROR = 'error',
-}
-
-function buttonSlots(icon: boolean, badge: boolean) {
-  // nested span tags allow for line-height erasers on the innermost span and flex-based centering on the outermost span
-  const textSlot = html`<span class="button-content"
-    ><span><slot></slot></span
-  ></span>`;
-  const slotWithIcon = html`${iconSlot}${textSlot}`;
-  const slotWithBadge = html`${textSlot}${badgeSlot}`;
-  const slotWithContentAndBadge = html`${iconSlot}${textSlot}${badgeSlot}`;
-
-  switch (true) {
-    case icon === true && badge === true:
-      return html`${slotWithContentAndBadge}`;
-    case icon === true:
-      return html`${slotWithIcon}`;
-    case badge === true:
-      return html`${slotWithBadge}`;
-    default:
-      return html`${textSlot}`;
-  }
 }
 
 /**
@@ -134,6 +110,9 @@ export class CdsButton extends CdsBaseButton {
   firstUpdated(props: Map<string, any>) {
     super.firstUpdated(props);
 
+    // Find and wrap any text nodes into span elements
+    spanWrapper(this.childNodes);
+
     if (this.loadingState !== ClrLoadingState.DEFAULT) {
       this.updateLoadingState();
     }
@@ -141,7 +120,6 @@ export class CdsButton extends CdsBaseButton {
 
   connectedCallback() {
     super.connectedCallback();
-    assignSlotNames([this.icon, 'button-icon'], [this.badge, 'button-badge']);
   }
 
   update(props: Map<string, any>) {
@@ -153,17 +131,15 @@ export class CdsButton extends CdsBaseButton {
 
   render() {
     const loadingState = this.loadingState;
-    const hasIcon = !!this.icon;
-    const hasBadge = !!this.badge;
-
-    return html`<div class="private-host" cds-layout="horizontal wrap:none">
-      ${loadingState === ClrLoadingState.SUCCESS ? html`${iconSpinnerCheck}` : ''}${loadingState ===
-      ClrLoadingState.ERROR
-        ? html`${iconSpinnerError}`
-        : ''}${loadingState === ClrLoadingState.LOADING ? html`${iconSpinner}` : ''}${loadingState ===
-      ClrLoadingState.DEFAULT
-        ? html`${buttonSlots(hasIcon, hasBadge)}`
-        : ''}${this.hiddenButtonTemplate}
+    return html`<div class="private-host">
+      <div cds-layout="horizontal gap:md wrap:none align:center">
+        ${loadingState === ClrLoadingState.SUCCESS ? iconCheck : ''}
+        ${loadingState === ClrLoadingState.ERROR ? iconError : ''}
+        ${loadingState === ClrLoadingState.LOADING ? iconSpinner(this.size) : ''}
+        ${loadingState === ClrLoadingState.DEFAULT
+          ? html`<slot @slotchange=${() => spanWrapper(this.childNodes)}></slot>`
+          : ''}${this.hiddenButtonTemplate}
+      </div>
     </div>`;
   }
 

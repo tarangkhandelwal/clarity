@@ -2,27 +2,27 @@
 
 Clarity provides its CSS as a standalone package for applications to use if they want to use Clarity without Angular. This is useful for some projects that want to look like Clarity but, for any number of reasons, may not want or be able to use Angular.
 
-> It is important to note that many components are not functional without Angular, and applications will need to either avoid those components or implement the interaction on their own. For example, if you are using Vue.js, you can still get Clarity styling on your page but behaviors like Datagrid interactions will not work out of the box.
+It is important to note that many components are not functional without Angular, and applications will need to either avoid those components or implement the interaction on their own. For example, if you are using Vue.js, you can still get Clarity styling on your page but behaviors like Datagrid interactions will not work out of the box.
 
 ## Step 1: Install Dependencies
 
 If you just want to use our HTML/CSS implementations, you need to get the latest code and then add the assets to your project. You can use `npm` or `yarn` to install the dependencies based on your preferred system.
 
-<DocDemo toggle="false">
+<doc-code>
 
 ```bash
 npm install @clr/ui @clr/icons @webcomponents/webcomponentsjs --save
 ```
 
-</DocDemo>
+</doc-code>
 
-<DocDemo toggle="false">
+<doc-code>
 
 ```bash
 yarn add @clr/ui @clr/icons @webcomponents/webcomponentsjs
 ```
 
-</DocDemo>
+</doc-code>
 
 ## Step 2: Include CSS and JavaScript
 
@@ -35,7 +35,7 @@ Depending on your framework and build tooling, this step may be done in many dif
 
 You can also load this CSS file from a CDN like you see below. See [unpkg.com](https://unpkg.com/#/) for more details.
 
-<DocDemo toggle="false">
+<doc-code>
 
 ```html
 <!-- Load the latest version -->
@@ -47,7 +47,7 @@ You can also load this CSS file from a CDN like you see below. See [unpkg.com](h
 <link rel="stylesheet" href="https://unpkg.com/@clr/icons@3.0.0/clr-icons.min.css" />
 ```
 
-</DocDemo>
+</doc-code>
 
 ## What's next?
 

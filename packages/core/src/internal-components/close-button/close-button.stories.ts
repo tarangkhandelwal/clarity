@@ -8,12 +8,12 @@ import '@clr/core/internal-components/close-button/register.js';
 import { angleIcon, ClarityIcons, timesCircleIcon, userIcon } from '@clr/core/icon';
 import { getElementStorybookArgTypes, spreadProps, getElementStorybookArgs } from '@clr/core/internal';
 import { html } from 'lit-html';
-import customElements from '../../dist/core/custom-elements.json';
+import customElements from '../../../dist/core/custom-elements.json';
 
 ClarityIcons.addIcons(angleIcon, userIcon, timesCircleIcon);
 
 export default {
-  title: 'Internal APIs/Close Button/Stories',
+  title: 'Internal/APIs/Close Button/Stories',
   component: 'cds-internal-close-button',
   argTypes: getElementStorybookArgTypes('cds-internal-close-button', customElements),
   parameters: {

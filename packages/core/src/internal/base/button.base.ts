@@ -11,19 +11,7 @@ import { property, internalProperty } from '../decorators/property.js';
 import { querySlot } from '../decorators/query-slot.js';
 import { onAnyKey } from '../utils/keycodes.js';
 import { stopEvent } from './../utils/events.js';
-
-// TODO: replace with circular progress bar when complete
-export const iconSpinnerCheck = html`<span class="button-status-icon" cds-layout="horizontal align:center"
-  ><span class="spinner spinner-inline spinner-check" cds-layout="align:center"></span
-></span>`;
-
-export const iconSpinner = html`<span class="button-status-icon" cds-layout="horizontal align:center"
-  ><span class="spinner spinner-inline" cds-layout="align:center"></span
-></span>`;
-
-export const iconSlot = html`<span class="button-icon"><slot name="button-icon"></slot></span>`;
-
-export const badgeSlot = html`<span class="button-badge"><slot name="button-badge"></slot></span>`;
+import { supportsFlexGap } from '@clr/core/internal';
 
 // @dynamic
 export class CdsBaseButton extends LitElement {
@@ -41,13 +29,19 @@ export class CdsBaseButton extends LitElement {
 
   @internalProperty({ type: Boolean, reflect: true }) protected focused = false;
 
-  @internalProperty({ type: Boolean, reflect: true }) protected isAnchor = false;
-
   @internalProperty({ type: String, reflect: true }) protected role: string | null = 'button';
 
-  @querySlot('cds-icon') protected icon: HTMLElement;
+  /** @deprecated slotted anchor deprecated in 4.0 in favor of wrapping element */
+  @internalProperty({ type: Boolean, reflect: true }) protected containsAnchor = false;
 
+  @internalProperty({ type: Boolean, reflect: true }) protected hasFlexGapSupport: boolean = supportsFlexGap();
+
+  /** @deprecated slotted anchor deprecated in 4.0 in favor of wrapping element */
   @querySlot('a') protected anchor: HTMLAnchorElement;
+
+  @internalProperty({ type: Boolean, reflect: true }) protected isAnchor = false;
+
+  @querySlot('cds-icon') protected icon: HTMLElement;
 
   @querySlot('cds-badge') protected badge: HTMLElement;
 
@@ -82,17 +76,13 @@ export class CdsBaseButton extends LitElement {
 
   protected firstUpdated(props: Map<string, any>) {
     super.firstUpdated(props);
-    this.updateButtonAttributes();
     this.setupAnchorFocus();
     this.setupNativeButtonBehavior();
   }
 
   protected updated(props: Map<string, any>) {
     super.updated(props);
-    // if readonly or disabled attribute was updated, button attributes might need updating
-    if (props.has('readonly') || props.has('disabled')) {
-      this.updateButtonAttributes();
-    }
+    this.updateButtonAttributes();
   }
 
   private setupAnchorFocus() {
@@ -140,8 +130,15 @@ export class CdsBaseButton extends LitElement {
   }
 
   private updateButtonAttributes() {
-    this.isAnchor = !!this.anchor;
-    this.readonly = this.readonly || this.isAnchor;
+    this.containsAnchor = !!this.anchor;
+    this.isAnchor = this.parentElement?.tagName === 'A';
+
+    if (this.isAnchor && this.parentElement) {
+      this.parentElement.style.lineHeight = '0';
+      this.parentElement.style.textDecoration = 'none'; // fixes issue when style is applied to text node
+    }
+
+    this.readonly = this.readonly || this.containsAnchor || this.isAnchor;
     this.role = this.readonly ? null : 'button';
 
     if (this.readonly) {

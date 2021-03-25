@@ -228,7 +228,9 @@ You can read more in about search in the design spec. The search component itsel
 
 The header and subnav support app-level information and navigation links.
 
-###### .header
+### Basics
+
+#### .header
 
 `.header` is a wrapper around the following four sections:
 
@@ -237,21 +239,27 @@ The header and subnav support app-level information and navigation links.
 - Search
 - Settings
 
-###### .branding
+#### .branding
 
 `.branding` contains the product logo and the product title. The logo extends the `.clr-icon` class and the title extends the `.title` class.
 
-###### .header-nav
+#### .header-nav
 
 `.header-nav` contains the navigation links. Each navigation link extends the `.nav-link` class along with the `.nav-text` class for text links and the `.nav-icon` class icon links.
 
-<doc-demo file="/demos/header/basic.html" />
+<doc-demo>
+!!!include(.vuepress/public/demos/header/basic.html)!!!
+</doc-demo>
 
-###### .search
+<doc-code>
+<<< .vuepress/public/demos/header/basic.html
+</doc-code>
+
+#### .search
 
 `.search` is a form containing the search icon and the search input field.
 
-###### .header-actions
+#### .header-actions
 
 `.header-actions` is a wrapper that contains secondary navigation links. Each navigation link extends the `.nav-link` class. Navigation links can be text or icons.
 
@@ -259,16 +267,34 @@ Info
 
 <!-- For information about headers with responsive navigation, see [Responsive Navigation](/foundation/navigation#responsive_navigation). -->
 
-#### Types
+### Types
 
-<doc-demo file="/demos/header/types.html" id="header-types" />
+<doc-demo id="header-types">
+!!!include(.vuepress/public/demos/header/types.html)!!!
+</doc-demo>
 
-#### Color Options
+<doc-code>
+<<< .vuepress/public/demos/header/types.html
+</doc-code>
 
-<doc-demo file="/demos/header/colors.html" id="color-types" />
+### Color Options
+
+<doc-demo id="color-types">
+!!!include(.vuepress/public/demos/header/colors.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/header/colors.html
+</doc-code>
 
 ### Subnav
 
 `.subnav` immediately follows the `.header`. It wraps a [tab](/components/tab) and an `aside` section.
 
-<doc-demo file="/demos/header/subnav.html" id="subnav-types" />
+<doc-demo id="subnav-types">
+!!!include(.vuepress/public/demos/header/subnav.html)!!!
+</doc-demo>
+
+<doc-code>
+<<< .vuepress/public/demos/header/subnav.html
+</doc-code>

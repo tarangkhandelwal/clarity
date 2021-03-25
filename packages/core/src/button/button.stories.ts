@@ -7,13 +7,13 @@
 import '@clr/core/badge/register.js';
 import '@clr/core/button/register.js';
 import '@clr/core/icon/register.js';
-import { ClarityIcons, userIcon } from '@clr/core/icon';
+import { ClarityIcons, userIcon, popOutIcon, downloadCloudIcon } from '@clr/core/icon';
 import { spreadProps, getElementStorybookArgs, getElementStorybookArgTypes } from '@clr/core/internal';
 import { action } from '@storybook/addon-actions';
 import { html } from 'lit-html';
 import customElements from '../../dist/core/custom-elements.json';
 
-ClarityIcons.addIcons(userIcon);
+ClarityIcons.addIcons(downloadCloudIcon, popOutIcon, userIcon);
 
 export default {
   title: 'Components/Button/Stories',
@@ -91,14 +91,18 @@ export const iconWithText = () => {
   return html`
     <div cds-layout="vertical gap:md">
       <div cds-layout="horizontal gap:sm">
-        <cds-button><cds-icon shape="user"></cds-icon> user account</cds-button>
-        <cds-button action="outline"><cds-icon shape="user"></cds-icon> user account</cds-button>
-        <cds-button action="flat"><cds-icon shape="user"></cds-icon> user account</cds-button>
+        <cds-button><cds-icon shape="user"></cds-icon>user account</cds-button>
+        <cds-button action="outline"><cds-icon shape="user"></cds-icon>user account</cds-button>
+        <cds-button action="flat"><cds-icon shape="user"></cds-icon>user account</cds-button>
       </div>
       <div cds-layout="horizontal gap:sm">
-        <cds-button size="sm"><cds-icon shape="user"></cds-icon> user account</cds-button>
-        <cds-button size="sm" action="outline"><cds-icon shape="user"></cds-icon> user account</cds-button>
-        <cds-button size="sm" action="flat"><cds-icon shape="user"></cds-icon> user account</cds-button>
+        <cds-button size="sm"><cds-icon shape="user"></cds-icon>user account</cds-button>
+        <cds-button size="sm" action="outline"><cds-icon shape="user"></cds-icon>user account</cds-button>
+        <cds-button size="sm" action="flat"><cds-icon shape="user"></cds-icon>user account</cds-button>
+      </div>
+      <div>
+        <cds-button>new window <cds-icon shape="pop-out"></cds-icon></cds-button>
+        <cds-button action="outline">download<cds-icon shape="download-cloud"></cds-icon></cds-button>
       </div>
     </div>
   `;
@@ -163,31 +167,33 @@ export const links = () => {
   return html`
     <div cds-layout="horizontal gap:sm">
       <cds-button>
-        link
-      </cds-button>
-      <cds-button>
-        <a href="javascript:void(0)">link</a>
+        button
       </cds-button>
 
-      <cds-button>
-        <a href="javascript:void(0)">this is a long link</a>
-      </cds-button>
+      <a href="javascript:void(0)">
+        <cds-button>link</cds-button>
+      </a>
 
-      <cds-button size="sm">
-        <a href="javascript:void(0)">small link</a>
-      </cds-button>
+      <a href="javascript:void(0)">
+        <cds-button>this is a long link</cds-button>
+      </a>
+
+      <a href="javascript:void(0)">
+        <cds-button size="sm">small link</cds-button>
+      </a>
+
       <br />
-      <cds-button action="outline">
-        <a href="javascript:void(0)">link</a>
-      </cds-button>
+      <a href="javascript:void(0)">
+        <cds-button action="outline">link</cds-button>
+      </a>
 
-      <cds-button action="outline">
-        <a href="javascript:void(0)">this is a long link</a>
-      </cds-button>
+      <a href="javascript:void(0)">
+        <cds-button action="outline">this is a long link</cds-button>
+      </a>
 
-      <cds-button action="outline" size="sm">
-        <a href="javascript:void(0)">small link</a>
-      </cds-button>
+      <a href="javascript:void(0)">
+        <cds-button action="outline" size="sm">small link</cds-button>
+      </a>
     </div>
   `;
 };

@@ -18,26 +18,33 @@ const read = dir =>
 read('./dist/core')
   .filter(f => f.endsWith('.css') && !f.endsWith('.min.css'))
   .forEach(file => {
-    const css = fs.readFileSync(file, 'utf8');
-    const result = csso.minify(css);
-    fs.writeFileSync(file.replace('.css', '.min.css'), result.css);
+    // remove internal shadow dom selectors from global light dom styles + ie11 fix with error on ::slotted
+    const optimizedFilePath = file.replace('.css', '.min.css');
+    const updated = fs.readFileSync(file, 'utf8').replace(/(,|,\n  \[)[^,]*(::slotted).*{/g, '{');
+    const current = fs.existsSync(optimizedFilePath) ? fs.readFileSync(optimizedFilePath, 'utf8') : '';
+    const optimized = csso.minify(updated).css;
+
+    if (current !== optimized) {
+      fs.writeFileSync(file, updated);
+      fs.writeFileSync(optimizedFilePath, optimized);
+    }
   });
 
 // This will remove unused utilities from cds-layout and typography from core components
 async function treeshakeCommonCSS() {
-  const sharedComponentStylesPath = './dist/core/internal/base/base.element.css.js';
-  const cssFile = fs.readFileSync(sharedComponentStylesPath, 'utf8');
+  const cssFile = fs.readFileSync('./src/internal/base/base.element.css.ts', 'utf8');
   const css = cssFile.match(/`([^`]+)`/)[1];
 
   const purgeCSSResult = await new PurgeCSS().purge({
-    content: ['./**/*.element.ts'],
-    defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || [],
+    content: ['./src/**/*.element.ts'],
+    defaultExtractor: content => content.match(/[\w-\/:@]+(?<!:)/g) || [],
     whitelistPatterns: [/:host$/],
     css: [{ raw: css }],
+    variables: true,
   });
 
   const result = cssFile.replace(/`([^`]+)`/, '`' + purgeCSSResult[0].css + '`');
-  fs.writeFileSync(sharedComponentStylesPath, result);
+  fs.writeFileSync('./dist/core/internal/base/base.element.css.js', result);
 }
 
 treeshakeCommonCSS();

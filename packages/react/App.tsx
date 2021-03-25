@@ -11,6 +11,7 @@ import { CdsIcon } from './src/icon';
 import { CdsInput } from './src/input';
 import { CdsModal, CdsModalActions, CdsModalContent, CdsModalHeader } from './src/modal';
 import { CdsPassword } from './src/password';
+import { CdsProgressCircle } from './src/progress-circle';
 import { CdsRadio, CdsRadioGroup } from './src/radio';
 import { CdsRange } from './src/range';
 import { CdsSearch } from './src/search';
@@ -20,11 +21,13 @@ import { CdsTime } from './src/time';
 import { CdsTextarea } from './src/textarea';
 import { CdsToggle, CdsToggleGroup } from './src/toggle';
 import { ClarityIcons, userIcon, timesIcon } from '@clr/core/icon';
+import { CdsDivider } from './src/divider';
 
 ClarityIcons.addIcons(userIcon, timesIcon);
 
 interface AppState {
   modalOpen: boolean;
+  modal2Open: boolean;
 }
 
 export default class App extends React.Component<{}, AppState> {
@@ -32,7 +35,7 @@ export default class App extends React.Component<{}, AppState> {
 
   constructor(props: any) {
     super(props);
-    this.state = { modalOpen: false };
+    this.state = { modalOpen: false, modal2Open: false };
     this.buttonRef = React.createRef<CdsButton>();
   }
 
@@ -48,6 +51,7 @@ export default class App extends React.Component<{}, AppState> {
 
   render() {
     const isModalOpen = this.state.modalOpen;
+    const isModal2Open = this.state.modal2Open;
     return (
       <div>
         <h1>Rendered by React!</h1>
@@ -62,6 +66,9 @@ export default class App extends React.Component<{}, AppState> {
             <CdsModalContent>
               <div cds-layout="vertical gap:md p-y:xs">
                 <p cds-text="body">Lorem Ipsum</p>
+                <CdsButton ref={this.buttonRef} onClick={() => this.setState({ modal2Open: true })}>
+                  Open Modal 2
+                </CdsButton>
               </div>
             </CdsModalContent>
             <CdsModalActions>
@@ -72,6 +79,21 @@ export default class App extends React.Component<{}, AppState> {
                 <CdsButton onClick={() => this.setState({ modalOpen: false })}>Ok</CdsButton>
               </div>
             </CdsModalActions>
+            <CdsModal hidden={!isModal2Open} onCloseChange={() => this.setState({ modal2Open: false })}>
+              <CdsModalHeader>
+                <h3 cds-text="title">My Modal</h3>
+              </CdsModalHeader>
+              <CdsModalContent>
+                <div cds-layout="vertical gap:md p-y:xs">
+                  <p cds-text="body">Focus trap inception!</p>
+                </div>
+              </CdsModalContent>
+              <CdsModalActions>
+                <div cds-layout="horizontal gap:sm align:right">
+                  <CdsButton onClick={() => this.setState({ modal2Open: false })}>Ok</CdsButton>
+                </div>
+              </CdsModalActions>
+            </CdsModal>
           </CdsModal>
         ) : (
           <br />
@@ -610,6 +632,22 @@ export default class App extends React.Component<{}, AppState> {
             <CdsControlMessage>message text</CdsControlMessage>
           </CdsSelect>
         </CdsFormGroup>
+
+        <h2>Divider</h2>
+        <CdsDivider></CdsDivider>
+
+        <div style={{ height: '140px', marginTop: '24px' }}>
+          <CdsDivider orientation="vertical">1</CdsDivider>
+        </div>
+
+        <h2>Progress</h2>
+        <h3>Circular</h3>
+        <div cds-layout="horizontal gap:sm">
+          <CdsProgressCircle size="xl" value={0}></CdsProgressCircle>
+          <CdsProgressCircle size="xl" value={49}></CdsProgressCircle>
+          <CdsProgressCircle size="xl" value={100}></CdsProgressCircle>
+          <CdsProgressCircle size="xl"></CdsProgressCircle>
+        </div>
       </div>
     );
   }

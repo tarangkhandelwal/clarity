@@ -13,12 +13,16 @@ ClrDropdown is the parent container for all child components and projected conte
 
 #### Selector & Basic Usage
 
+<doc-code>
+
 ```html
 <clr-dropdown>
   <!-- trigger element -->
   <!-- menu component -->
 </clr-dropdown>
 ```
+
+</doc-code>
 
 #### Bindings
 
@@ -30,6 +34,8 @@ ClrDropdown Menu component holds the menu items and projects group and seperator
 
 #### Selector & Basic Usage
 
+<doc-code>
+
 ```html
 <clr-dropdown>
   <!-- trigger -->
@@ -38,6 +44,8 @@ ClrDropdown Menu component holds the menu items and projects group and seperator
   </clr-dropdown-menu>
 </clr-dropdown>
 ```
+
+</doc-code>
 
 #### Bindings
 
@@ -56,6 +64,8 @@ To use them, add an element with the appropriate class.
 
 #### Selector & Basic Usage
 
+<doc-code>
+
 ```html
 <clr-dropdown>
   <button class="btn btn-primary" clrDropdownTrigger>
@@ -65,9 +75,13 @@ To use them, add an element with the appropriate class.
 </clr-dropdown>
 ```
 
+</doc-code>
+
 ### ClrDropdownItem
 
 #### Selector & Basic Usage
+
+<doc-code>
 
 ```html
 <clr-dropdown>
@@ -79,6 +93,8 @@ To use them, add an element with the appropriate class.
 </clr-dropdown>
 ```
 
+</doc-code>
+
 #### Bindings
 
 <DocComponentApi component="ClrDropdownItem" item="bindings" />
@@ -89,6 +105,8 @@ ClrIfOpen is a structural directive applied to the ClrDropdownMenu element that 
 
 #### Selector & Basic Usage
 
+<doc-code>
+
 ```html
 <clr-dropdown>
   <!-- trigger element -->
@@ -97,6 +115,8 @@ ClrIfOpen is a structural directive applied to the ClrDropdownMenu element that 
   </clr-dropdown-menu>
 </clr-dropdown>
 ```
+
+</doc-code>
 
 #### Bindings
 

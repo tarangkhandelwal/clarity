@@ -13,7 +13,7 @@ import { ClrPopoverToggleService } from '../../utils/popover/providers/popover-t
 import { ControlClassService } from '../common/providers/control-class.service';
 import { ControlIdService } from '../common/providers/control-id.service';
 import { FocusService } from '../common/providers/focus.service';
-import { Layouts, LayoutService } from '../common/providers/layout.service';
+import { ClrFormLayout, LayoutService } from '../common/providers/layout.service';
 import { NgControlService } from '../common/providers/ng-control.service';
 import { PopoverPosition } from '../../popover/common/popover-positions';
 
@@ -176,6 +176,22 @@ export default function () {
         context.detectChanges();
         expect(context.clarityDirective.popoverPosition).toEqual(ClrPopoverPositions['top-left']);
       });
+
+      it('should add/remove success icon and text', () => {
+        /* valid */
+        context.clarityDirective.showValid = true;
+        context.clarityDirective.showInvalid = false;
+        context.detectChanges();
+        expect(context.clarityElement.querySelector('clr-control-success')).toBeTruthy();
+        expect(context.clarityElement.querySelector('clr-icon[shape=check-circle]')).toBeTruthy();
+
+        /* invalid */
+        context.clarityDirective.showValid = false;
+        context.clarityDirective.showInvalid = true;
+        context.detectChanges();
+        expect(context.clarityElement.querySelector('clr-control-success')).toBeNull();
+        expect(context.clarityElement.querySelector('clr-icon[shape=check-circle]')).toBeNull();
+      });
     });
 
     describe('Typescript API', () => {
@@ -193,12 +209,13 @@ export default function () {
         expect(context.clarityDirective.controlClass()).toContain('clr-error');
         const controlClassService = context.getClarityProvider(ControlClassService);
         const layoutService = context.getClarityProvider(LayoutService);
-        layoutService.layout = Layouts.VERTICAL;
+        layoutService.layout = ClrFormLayout.VERTICAL;
         context.clarityDirective.state = CONTROL_STATE.VALID;
         expect(context.clarityDirective.controlClass()).not.toContain('clr-error');
         expect(context.clarityDirective.controlClass()).not.toContain('clr-col-md-10');
         controlClassService.className = 'clr-col-2';
         expect(context.clarityDirective.controlClass()).not.toContain('clr-col-md-10');
+        expect(context.clarityDirective.controlClass()).toContain('clr-success');
       });
     });
   });
@@ -208,6 +225,7 @@ export default function () {
   template: `
     <clr-date-container [clrPosition]="position">
       <input type="date" clrDate [(ngModel)]="model" [disabled]="disabled" />
+      <clr-control-success>Valid</clr-control-success>
     </clr-date-container>
   `,
 })

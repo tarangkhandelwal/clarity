@@ -1,4 +1,5 @@
 const markdownItAttrs = require('markdown-it-attrs');
+const markdownItInclude = require('markdown-it-include');
 const sidebar = require('./sidebar');
 const blocks = require('./blocks');
 const path = require('path');
@@ -34,14 +35,16 @@ module.exports = {
   markdown: {
     extendMarkdown: md => {
       md.use(markdownItAttrs);
+      md.use(markdownItInclude);
     },
     anchor: {
       permalink: true,
       permalinkBefore: false,
-      permalinkSymbol: '<cds-icon shape="link"></cds-icon>',
+      permalinkSymbol: '<cds-icon shape="link" aria-hidden="true"></cds-icon>',
+      permalinkAttrs: (slug, state) => ({"aria-label": `permalink to ${slug}`})
     },
   },
-  extraWatchFiles: ['.vuepress/sidebar.js', '.vuepress/blocks.js'],
+  extraWatchFiles: ['.vuepress/sidebar.js', '.vuepress/blocks.js', '.vuepress/public/**'],
   plugins: [
     'vuepress-plugin-table-of-contents',
     '@vuepress/active-header-links',
@@ -125,8 +128,7 @@ module.exports = {
         '@clr/core/textarea': path.resolve('../../dist/core/textarea'),
         '@clr/core/time': path.resolve('../../dist/core/time'),
         '@clr/core/toggle': path.resolve('../../dist/core/toggle'),
-        '@clr/icons': path.resolve('../../dist/clr-icons'),
-        '@clr/icons/shapes/all-shapes': path.resolve('../../dist/clr-icons/shapes/all-shapes.min'),
+        // @TODO Would like to be able to remove these
         'ramda': path.resolve('../../packages/core/node_modules/ramda'),
         'ramda/es/anyPass': path.resolve('../../packages/core/node_modules/ramda/es/anyPass.js'),
         'ramda/es/equals': path.resolve('../../packages/core/node_modules/ramda/es/equals.js'),

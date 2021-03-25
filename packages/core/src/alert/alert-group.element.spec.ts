@@ -3,16 +3,12 @@
  * This software is released under MIT license.
  * The full license information can be found in LICENSE in the root directory of this project.
  */
+
+import { html } from 'lit-html';
 import '@clr/core/alert/register.js';
 import '@clr/core/icon/register.js';
 import { CdsAlert, CdsAlertGroup } from '@clr/core/alert';
-import {
-  componentIsStable,
-  createTestElement,
-  getComponentSlotContent,
-  removeTestElement,
-  waitForComponent,
-} from '@clr/core/test/utils';
+import { componentIsStable, createTestElement, getComponentSlotContent, removeTestElement } from '@clr/core/test/utils';
 
 describe('Alert groups – ', () => {
   let testElement: HTMLElement;
@@ -21,21 +17,79 @@ describe('Alert groups – ', () => {
   const placeholderText = 'I am an alert.';
   const alertStatusIconSelector = '.alert-status-icon';
 
+  describe('syncAlerts: ', () => {
+    beforeEach(async () => {
+      testElement = await createTestElement(html`
+        <cds-alert-group id="default" status="success">
+          <cds-alert>ohai</cds-alert>
+          <cds-alert status="loading">not me</cds-alert>
+          <cds-alert>ohai</cds-alert>
+        </cds-alert-group>
+      `);
+
+      alertGroup = testElement.querySelector<CdsAlertGroup>('#default');
+    });
+
+    afterEach(() => {
+      removeTestElement(testElement);
+    });
+
+    it('should sync alerts to alert group when rendered', async () => {
+      await componentIsStable(alertGroup);
+      const alertGroupSize = alertGroup.size;
+      const alertGroupStatus = alertGroup.status;
+      const alertGroupType = alertGroup.type;
+
+      alertGroup.querySelectorAll<CdsAlert>('cds-alert').forEach(a => {
+        expect(a.size).toBe(alertGroupSize);
+        expect(a.type).toBe(alertGroupType);
+        if (a.status !== 'loading') {
+          expect(a.status).toBe(alertGroupStatus);
+        }
+      });
+    });
+
+    it('should sync alerts to alert group when alerts are added to the alerts slot', async () => {
+      await componentIsStable(alertGroup);
+      const alertGroupSize = alertGroup.size;
+      const alertGroupStatus = alertGroup.status;
+      const alertGroupType = alertGroup.type;
+
+      function addNewAlert(grp: CdsAlertGroup) {
+        return new Promise(resolve => {
+          setTimeout(() => {
+            grp.innerHTML = grp.innerHTML + '<cds-alert id="problemchild">Muwahahahaha</cds-alert>';
+            resolve('ok');
+          }, 100);
+        });
+      }
+
+      await addNewAlert(alertGroup);
+      await componentIsStable(alertGroup);
+
+      alertGroup.querySelectorAll<CdsAlert>('cds-alert').forEach(a => {
+        expect(a.size).toBe(alertGroupSize);
+        expect(a.type).toBe(alertGroupType);
+        if (a.status !== 'loading') {
+          expect(a.status).toBe(alertGroupStatus);
+        }
+      });
+    });
+  });
+
   describe('size: ', () => {
     let compactAlertGroup: CdsAlertGroup;
 
     beforeEach(async () => {
-      testElement = createTestElement();
-      testElement.innerHTML = `
+      testElement = await createTestElement(html`
         <cds-alert-group id="default">
           <cds-alert>${placeholderText}</cds-alert>
         </cds-alert-group>
         <cds-alert-group id="small" size="sm">
           <cds-alert>${placeholderText}</cds-alert>
         </cds-alert-group>
-      `;
+      `);
 
-      await waitForComponent('cds-alert');
       alertGroup = testElement.querySelector<CdsAlertGroup>('#default');
       compactAlertGroup = testElement.querySelector<CdsAlertGroup>('#small');
     });
@@ -72,12 +126,12 @@ describe('Alert groups – ', () => {
     });
 
     it('sets cds-layout as expected', async () => {
-      const wrapper = compactAlertGroup.shadowRoot.querySelector('.alert-group-wrapper');
+      const slot = compactAlertGroup.shadowRoot.querySelector('.alert-group-wrapper > [cds-layout]');
       let layout: string;
 
       await componentIsStable(compactAlertGroup);
 
-      layout = wrapper.getAttribute('cds-layout');
+      layout = slot.getAttribute('cds-layout');
       expect(layout.includes('vertical')).toBe(true, 'Compact alert group should include vertical layout');
       expect(layout.includes('wrap:none')).toBe(true, 'Compact alert group should include wrap:none layout');
       expect(layout.includes('gap:none')).toBe(true, 'Compact alert group should include gap:none layout');
@@ -91,7 +145,7 @@ describe('Alert groups – ', () => {
 
       await componentIsStable(compactAlertGroup);
 
-      layout = wrapper.getAttribute('cds-layout');
+      layout = slot.getAttribute('cds-layout');
       expect(layout.includes('vertical')).toBe(true, 'Default alert group should include vertical layout');
       expect(layout.includes('wrap:none')).toBe(true, 'Default alert group should include wrap:none layout');
       expect(layout.includes('gap:none')).toBe(false, 'Default alert group should NOT include gap:none layout');
@@ -107,8 +161,7 @@ describe('Alert groups – ', () => {
     let lightAlertGroup: CdsAlertGroup;
 
     beforeEach(async () => {
-      testElement = createTestElement();
-      testElement.innerHTML = `
+      testElement = await createTestElement(html`
         <cds-alert-group id="default">
           <cds-alert>${placeholderText}</cds-alert>
           <cds-alert>${placeholderText}</cds-alert>
@@ -117,9 +170,8 @@ describe('Alert groups – ', () => {
           <cds-alert>${placeholderText}</cds-alert>
           <cds-alert>${placeholderText}</cds-alert>
         </cds-alert-group>
-      `;
+      `);
 
-      await waitForComponent('cds-alert');
       alertGroup = testElement.querySelector<CdsAlertGroup>('#default');
       lightAlertGroup = testElement.querySelector<CdsAlertGroup>('#light');
     });
@@ -176,16 +228,15 @@ describe('Alert groups – ', () => {
     let bannerAlertGroupWithNoStatus: CdsAlertGroup;
 
     beforeEach(async () => {
-      testElement = createTestElement();
-      testElement.innerHTML = `
+      testElement = await createTestElement(html`
         <cds-alert-group type="banner" id="bannerAlertGroup" status="warning">
           <cds-alert>${placeholderText}</cds-alert>
         </cds-alert-group>
         <cds-alert-group type="banner" id="bannerAlertGroupNoStatus">
           <cds-alert id="statusless">${placeholderText}</cds-alert>
         </cds-alert-group>
-      `;
-      await waitForComponent('cds-alert');
+      `);
+
       bannerAlertGroup = testElement.querySelector('#bannerAlertGroup');
       bannerAlertGroupWithNoStatus = testElement.querySelector('#bannerAlertGroupNoStatus');
     });
@@ -214,16 +265,14 @@ describe('Alert groups – ', () => {
     let loadingAlert: CdsAlert;
 
     beforeEach(async () => {
-      testElement = createTestElement();
-      testElement.innerHTML = `
+      testElement = await createTestElement(html`
         <cds-alert-group>
           <cds-alert id="defaultAlert">${placeholderText}</cds-alert>
           <cds-alert id="customAlert" status="warning"><cds-icon shape="ohai"></cds-icon>${placeholderText}</cds-alert>
           <cds-alert id="loadingAlert" status="loading">${placeholderText}</cds-alert>
         </cds-alert-group>
-      `;
+      `);
 
-      await waitForComponent('cds-alert');
       alertGroup = testElement.querySelector<CdsAlertGroup>('cds-alert-group');
       defaultAlert = alertGroup.querySelector('#defaultAlert');
       customAlert = alertGroup.querySelector('#customAlert');
@@ -252,7 +301,7 @@ describe('Alert groups – ', () => {
         'does not override child alert loading status pt. 1'
       );
       expect(loadingAlertSlotContent['alert-icon']).toBeUndefined('does not override child alert loading status pt. 1');
-      expect(loadingAlert.shadowRoot.querySelectorAll('.spinner-inline').length > 0).toBe(
+      expect(loadingAlert.shadowRoot.querySelectorAll('.alert-spinner').length > 0).toBe(
         true,
         'does not override child alert loading status pt. 2'
       );
@@ -281,7 +330,7 @@ describe('Alert groups – ', () => {
         null,
         'does not update icon shape of child alerts with a loading status pt. 1'
       );
-      expect(loadingAlert.shadowRoot.querySelectorAll('.spinner-inline').length > 0).toBe(
+      expect(loadingAlert.shadowRoot.querySelectorAll('.alert-spinner').length > 0).toBe(
         true,
         'does not update icon shape of child alerts with a loading status pt. 2'
       );
@@ -294,8 +343,7 @@ describe('Alert groups – ', () => {
     let pager: HTMLElement;
 
     beforeEach(async () => {
-      testElement = createTestElement();
-      testElement.innerHTML = `
+      testElement = await createTestElement(html`
         <cds-alert-group id="noPager" type="banner">
           <cds-alert>${placeholderText}</cds-alert>
         </cds-alert-group>
@@ -303,9 +351,8 @@ describe('Alert groups – ', () => {
           <div id="pager" class="pager">Pager Here</div>
           <cds-alert>${placeholderText}</cds-alert>
         </cds-alert-group>
-      `;
+      `);
 
-      await waitForComponent('cds-alert');
       alertGroup = testElement.querySelector<CdsAlertGroup>('#noPager');
       alertGroupWithPager = testElement.querySelector<CdsAlertGroup>('#hasPager');
       pager = testElement.querySelector<HTMLElement>('#pager');

@@ -3,17 +3,19 @@ title: API
 toc: true
 ---
 
-Use checkboxes when users need to select multiple options in a list of related options.
-
 ## Angular Components
 
 ### ClrToggle
 
 #### Selector & Basic Usage
 
+<doc-code>
+
 ```html
 <input type="checkbox" clrToggle value="option1" name="options" />
 ```
+
+</doc-code>
 
 #### Bindings
 
@@ -24,6 +26,8 @@ Use checkboxes when users need to select multiple options in a list of related o
 A container component used to enable helper and error messages and works with Angular forms.
 
 #### Selector & Basic Usage
+
+<doc-code>
 
 ```html
 <clr-toggle-container>
@@ -40,6 +44,8 @@ A container component used to enable helper and error messages and works with An
 </clr-toggle-container>
 ```
 
+</doc-code>
+
 #### Bindings
 
 <DocComponentApi component="ClrCheckboxContainer" item="bindings" />
@@ -50,9 +56,13 @@ The ClrToggleWrapper associates a specific label with the ClrToggle input.
 
 #### Selector & Basic Usage
 
+<doc-code>
+
 ```html
 <clr-toggle-wrapper>
   <input type="checkbox" clrToggle value="option1" name="options" />
   <label>Option 1</label>
 </clr-toggle-wrapper>
 ```
+
+</doc-code>

@@ -49,6 +49,7 @@ export declare abstract class ClrAbstractContainer implements DynamicWrapper, On
     _dynamic: boolean;
     control: NgControl;
     protected controlClassService: ControlClassService;
+    controlSuccessComponent: ClrControlSuccess;
     protected ifControlStateService: IfControlStateService;
     label: ClrLabel;
     protected layoutService: LayoutService;
@@ -88,12 +89,13 @@ export declare class ClrAccordionPanel implements OnInit, OnChanges {
     accordionDescription: QueryList<ClrAccordionDescription>;
     commonStrings: ClrCommonStringsService;
     disabled: boolean;
-    id: string;
+    get id(): string;
+    set id(value: string);
     isAccordion: boolean;
     panel: Observable<AccordionPanelModel>;
     panelOpen: boolean;
     panelOpenChange: EventEmitter<boolean>;
-    constructor(commonStrings: ClrCommonStringsService, accordionService: AccordionService, ifExpandService: IfExpandService, id: string);
+    constructor(commonStrings: ClrCommonStringsService, accordionService: AccordionService, ifExpandService: IfExpandService, _id: string);
     collapsePanelOnAnimationDone(panel: AccordionPanelModel): void;
     getAccordionContentId(id: string): string;
     getAccordionHeaderId(id: string): string;
@@ -263,7 +265,6 @@ export declare class ClrCheckboxContainer extends ClrAbstractContainer {
     set clrInline(value: boolean | string);
     get clrInline(): boolean | string;
     protected controlClassService: ControlClassService;
-    controlSuccessComponent: ClrControlSuccess;
     protected ifControlStateService: IfControlStateService;
     protected layoutService: LayoutService;
     protected ngControlService: NgControlService;
@@ -293,6 +294,7 @@ export declare class ClrCombobox<T> extends WrappedFormControl<ClrComboboxContai
     control: NgControl;
     get displayField(): string;
     protected el: ElementRef;
+    focused: boolean;
     focusedPill: any;
     get id(): string;
     protected index: number;
@@ -302,6 +304,7 @@ export declare class ClrCombobox<T> extends WrappedFormControl<ClrComboboxContai
     get openState(): boolean;
     optionSelected: ClrOptionSelected<T>;
     optionSelectionService: OptionSelectionService<T>;
+    placeholder: string;
     protected renderer: Renderer2;
     set searchText(text: string);
     get searchText(): string;
@@ -319,6 +322,7 @@ export declare class ClrCombobox<T> extends WrappedFormControl<ClrComboboxContai
     ngAfterViewInit(): void;
     ngOnDestroy(): void;
     onBlur(): void;
+    onFocus(): void;
     onKeyUp(event: KeyboardEvent): void;
     registerOnChange(onChange: any): void;
     registerOnTouched(onTouched: any): void;
@@ -329,7 +333,6 @@ export declare class ClrCombobox<T> extends WrappedFormControl<ClrComboboxContai
 
 export declare class ClrComboboxContainer extends ClrAbstractContainer implements AfterContentInit, AfterViewInit {
     controlContainer: ElementRef;
-    controlSuccessComponent: ClrControlSuccess;
     label: ClrLabel;
     constructor(ifControlStateService: IfControlStateService, layoutService: LayoutService, controlClassService: ControlClassService, ngControlService: NgControlService, containerService: ComboboxContainerService, el: ElementRef);
     ngAfterContentInit(): void;
@@ -435,7 +438,6 @@ export declare class ClrControl extends WrappedFormControl<ClrControlContainer> 
 }
 
 export declare class ClrControlContainer extends ClrAbstractContainer {
-    controlSuccessComponent: ClrControlSuccess;
 }
 
 export declare class ClrControlError {
@@ -515,7 +517,7 @@ export declare class ClrDatagridCell implements OnInit {
     ngOnInit(): void;
 }
 
-export declare class ClrDatagridColumn<T = any> extends DatagridFilterRegistrar<T, ClrDatagridFilterInterface<T>> implements OnDestroy, OnInit {
+export declare class ClrDatagridColumn<T = any> extends DatagridFilterRegistrar<T, ClrDatagridFilterInterface<T>> implements OnDestroy, OnInit, OnChanges {
     get _view(): any;
     get ariaSort(): "none" | "ascending" | "descending";
     get colType(): 'string' | 'number';
@@ -541,6 +543,7 @@ export declare class ClrDatagridColumn<T = any> extends DatagridFilterRegistrar<
     sortedChange: EventEmitter<boolean>;
     set updateFilterValue(newValue: string | [number, number]);
     constructor(_sort: Sort<T>, filters: FiltersProvider<T>, vcr: ViewContainerRef, detailService: DetailService, changeDetectorRef: ChangeDetectorRef, commonStrings: ClrCommonStringsService);
+    ngOnChanges(changes: SimpleChanges): void;
     ngOnDestroy(): void;
     ngOnInit(): void;
     sort(reverse?: boolean): void;
@@ -808,7 +811,6 @@ export declare class ClrDatalist implements AfterContentInit {
 }
 
 export declare class ClrDatalistContainer extends ClrAbstractContainer {
-    controlSuccessComponent: ClrControlSuccess;
     focus: boolean;
     protected ifControlStateService: IfControlStateService;
     constructor(controlClassService: ControlClassService, layoutService: LayoutService, ngControlService: NgControlService, focusService: FocusService, ifControlStateService: IfControlStateService);
@@ -836,15 +838,15 @@ export declare class ClrDateContainer implements DynamicWrapper, OnDestroy, Afte
     control: NgControl;
     controlSuccessComponent: ClrControlSuccess;
     focus: boolean;
-    invalid: boolean;
     get isEnabled(): boolean;
     get isInputDateDisabled(): boolean;
     label: ClrLabel;
     get open(): boolean;
     get popoverPosition(): ClrPopoverPosition;
     showHelper: boolean;
+    showInvalid: boolean;
+    showValid: boolean;
     state: CONTROL_STATE;
-    valid: boolean;
     constructor(toggleService: ClrPopoverToggleService, dateNavigationService: DateNavigationService, datepickerEnabledService: DatepickerEnabledService, dateFormControlService: DateFormControlService, commonStrings: ClrCommonStringsService, focusService: FocusService, viewManagerService: ViewManagerService, controlClassService: ControlClassService, layoutService: LayoutService, ngControlService: NgControlService, ifControlStateService: IfControlStateService);
     addGrid(): boolean;
     controlClass(): string;
@@ -1042,12 +1044,18 @@ export declare class ClrFocusOnViewInitModule {
 }
 
 export declare class ClrForm {
-    set labelSize(size: number);
+    set labelSize(size: number | string);
     labels: QueryList<ClrLabel>;
     layoutService: LayoutService;
     constructor(layoutService: LayoutService, markControlService: MarkControlService);
     markAsTouched(): void;
     onFormSubmit(): void;
+}
+
+export declare enum ClrFormLayout {
+    VERTICAL = "vertical",
+    HORIZONTAL = "horizontal",
+    COMPACT = "compact"
 }
 
 export declare class ClrFormsModule {
@@ -1131,7 +1139,6 @@ export declare class ClrInput extends WrappedFormControl<ClrInputContainer> {
 }
 
 export declare class ClrInputContainer extends ClrAbstractContainer {
-    controlSuccessComponent: ClrControlSuccess;
 }
 
 export declare class ClrInputModule {
@@ -1147,7 +1154,7 @@ export declare class ClrLabel implements OnInit, OnDestroy {
 }
 
 export declare class ClrLayout implements OnInit {
-    layout: Layouts;
+    layout: ClrFormLayout;
     layoutService: LayoutService;
     constructor(layoutService: LayoutService);
     ngOnInit(): void;
@@ -1320,7 +1327,6 @@ export declare class ClrPasswordContainer extends ClrAbstractContainer {
     set clrToggle(state: boolean);
     get clrToggle(): boolean;
     commonStrings: ClrCommonStringsService;
-    controlSuccessComponent: ClrControlSuccess;
     focus: boolean;
     focusService: FocusService;
     show: boolean;
@@ -1439,7 +1445,6 @@ export declare class ClrRadioContainer extends ClrAbstractContainer {
     set clrInline(value: boolean | string);
     get clrInline(): boolean | string;
     protected controlClassService: ControlClassService;
-    controlSuccessComponent: ClrControlSuccess;
     protected ifControlStateService: IfControlStateService;
     protected layoutService: LayoutService;
     protected ngControlService: NgControlService;
@@ -1460,7 +1465,6 @@ export declare class ClrRange extends WrappedFormControl<ClrRangeContainer> {
 }
 
 export declare class ClrRangeContainer extends ClrAbstractContainer {
-    controlSuccessComponent: ClrControlSuccess;
     set hasProgress(val: boolean);
     get hasProgress(): boolean;
     protected ifControlStateService: IfControlStateService;
@@ -1491,7 +1495,6 @@ export declare class ClrSelect extends WrappedFormControl<ClrSelectContainer> {
 
 export declare class ClrSelectContainer extends ClrAbstractContainer {
     protected controlClassService: ControlClassService;
-    controlSuccessComponent: ClrControlSuccess;
     protected ifControlStateService: IfControlStateService;
     protected layoutService: LayoutService;
     multiple: SelectMultipleControlValueAccessor;
@@ -1567,7 +1570,6 @@ export declare class ClrStackBlock implements OnInit {
     ariaPosinset: number;
     ariaSetsize: number;
     get caretDirection(): string;
-    get caretTitle(): string;
     commonStrings: ClrCommonStringsService;
     expandable: boolean;
     expanded: boolean;
@@ -1741,7 +1743,6 @@ export declare class ClrTextarea extends WrappedFormControl<ClrTextareaContainer
 }
 
 export declare class ClrTextareaContainer extends ClrAbstractContainer {
-    controlSuccessComponent: ClrControlSuccess;
 }
 
 export declare class ClrTextareaModule {
@@ -2082,6 +2083,7 @@ export declare class ClrWizardStepnavItem {
     navService: WizardNavigationService;
     page: ClrWizardPage;
     pageCollection: PageCollectionService;
+    get stepAriaCurrent(): string;
     constructor(navService: WizardNavigationService, pageCollection: PageCollectionService);
     click(): void;
 }

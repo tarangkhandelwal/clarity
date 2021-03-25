@@ -3,13 +3,13 @@ title: API
 toc: true
 ---
 
-Use checkboxes when users need to select multiple options in a list of related options.
-
 ## Angular Components
 
 ### ClrForm
 
 #### Selector & Basic Usage
+
+<doc-code>
 
 ```html
 <form clrForm>
@@ -19,6 +19,8 @@ Use checkboxes when users need to select multiple options in a list of related o
   </clr-date-container>
 </form>
 ```
+
+</doc-code>
 
 #### Bindings
 
@@ -47,11 +49,15 @@ A generic control container that supports form controls not directly support in 
 </form>
 ````
 
+</doc-code>
+
 ### ClrControlError
 
 Enable error messages per form control.
 
 #### Selector & Basic Usage
+
+<doc-code>
 
 ```html
 <form clrForm>
@@ -64,11 +70,15 @@ Enable error messages per form control.
 </form>
 ```
 
+</doc-code>
+
 ### ClrControlHelper
 
 Enable helper messages per form control.
 
 #### Selector & Basic Usage
+
+<doc-code>
 
 ```html
 <form clrForm>
@@ -81,9 +91,9 @@ Enable helper messages per form control.
 </form>
 ```
 
-## Angular Directives
+</doc-code>
 
-#### Bindings
+## Angular Directives
 
 ### ClrLayout
 
@@ -91,8 +101,12 @@ Use the ClrLayout directive to enable different layouts for the form.
 
 #### Selector & Basic Usage
 
+<doc-code>
+
 ```html
 <form clrForm clrLayout="horizontal">
   ... form controls
 </form>
 ```
+
+</doc-code>
